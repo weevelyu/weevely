@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  username  String     @unique @db.VarChar(16)
+  email     String     @unique @db.VarChar(32)
+  role      Role       @default(USER)
+  password  String     @db.TinyText
+  calendars Calendar[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Calendar {
+  id       Int      @id @default(autoincrement())
+  authorId Int
+  author   User     @relation(fields: [authorId], references: [id])
+  title    String?  @default("New calendar") @db.VarChar(16)
+  main     Boolean? @default(false)
+  hidden   Boolean? @default(false)
+  shared   Boolean? @default(false)
+  events   Event[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("calendars")
+}
+
+model Event {
+  id         Int       @id @default(autoincrement())
+  calendarId Int
+  calendar   Calendar  @relation(fields: [calendarId], references: [id])
+  title      String?   @default("New event") @db.VarChar(16)
+  content    String?   @db.TinyText
+  category   Category? @default(Reminder)
+  target     DateTime?
+  duration   Int?      @db.UnsignedInt
+  system     Boolean?  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+
+  @@map("events")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Category {
+  Arrangement
+  Reminder
+  Task
+}

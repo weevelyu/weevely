@@ -1,0 +1,43 @@
+{
+  "name": "chronos",
+  "version": "1.0.0",
+  "description": "Simple event calendar built with Next.js and React.js that can be used for creating, managing, and searching for events.",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "next start",
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PAXANDDOS/chronos-next.git"
+  },
+  "keywords": [
+    "chronos",
+    "calendar",
+    "events",
+    "event-calendar"
+  ],
+  "author": "Paul Litovka",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/PAXANDDOS/chronos-next/issues"
+  },
+  "homepage": "https://github.com/PAXANDDOS/chronos-next#readme",
+  "dependencies": {
+    "@prisma/client": "^2.25.0",
+    "bcryptjs": "^2.4.3",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "next": "^11.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass": "^1.35.1",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "prisma": "^2.25.0"
+  }
+}
