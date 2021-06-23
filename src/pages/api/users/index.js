@@ -11,9 +11,8 @@ async function handler(req, res) {
 		case "POST":
 			const user = await prisma.user.create({
 				data: {
-					username: req.body.username,
+					name: req.body.username,
 					email: req.body.email,
-					password: req.body.password,
 					calendars: {
 						create: [{ title: "My calendar", main: true }],
 					},
