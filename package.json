@@ -1,5 +1,5 @@
 {
-  "name": "chronos",
+  "name": "weevely",
   "version": "1.0.0",
   "description": "Simple event calendar built with Next.js and React.js that can be used for creating, managing, and searching for events.",
   "private": true,
@@ -12,20 +12,29 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PAXANDDOS/chronos-next.git"
+    "url": "git+https://github.com/PAXANDDOS/weevely-next.git"
   },
   "keywords": [
-    "chronos",
+    "weevely",
     "calendar",
     "events",
-    "event-calendar"
+    "event-calendar",
+    "chronos",
+    "time-management",
+    "time",
+    "weekend",
+    "holiday",
+    "nextjs",
+    "reactjs",
+    "nextauth",
+    "prisma"
   ],
   "author": "Paul Litovka",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/PAXANDDOS/chronos-next/issues"
+    "url": "https://github.com/PAXANDDOS/weevely-next/issues"
   },
-  "homepage": "https://github.com/PAXANDDOS/chronos-next#readme",
+  "homepage": "https://github.com/PAXANDDOS/weevely-next#readme",
   "dependencies": {
     "@ipregistry/client": "^4.0.0",
     "@next-auth/prisma-adapter": "^0.4.4-canary.64",

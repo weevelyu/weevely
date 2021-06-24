@@ -10,10 +10,13 @@ export default class MyDocument extends Document {
 						httpEquiv='content-type'
 						content='text/html; charset=UTF-8'
 					/>
-					<meta name='description' content='Chronos' />
+					<meta
+						name='description'
+						content='Simple event calendar for creating, managing, and searching events.'
+					/>
 					<meta
 						name='keywords'
-						content='chronos, calendar, events, event-calendar'
+						content='weevely, calendar, events, event-calendar, time, time-management, weekend, holiday'
 					/>
 					<meta name='author' content='Paul Litovka' />
 					<meta name='owner' content='Paul Litovka' />
