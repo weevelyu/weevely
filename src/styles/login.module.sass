@@ -1,0 +1,144 @@
+@use 'index.scss' as *
+
+.login
+    @include flex-row
+    width: 100%
+    height: calc(100% - 100px)
+    justify-content: center
+    align-items: center
+
+    .fields
+        @include flex-column
+        align-items: flex-start
+        width: 500px
+        height: 600px
+        margin-top: 60px
+
+        h1
+
+            font-size: 36px
+        span
+            margin: 20px 0 50px 0
+            font-size: 20px
+            color: #0f1031
+            a
+                color: $brand-purple
+                &:hover
+                    text-decoration: underline
+
+        form
+            @include flex-column
+            width: 100%
+
+            label
+                @include flex-column
+                font-size: 16px
+
+                input
+                    height: 50px
+                    padding: 6px
+                    font-size: 18px
+                    background: $brand-white
+                    border-radius: 10px
+                    border: 1px solid $brand-accent-2
+                    margin-top: 6px
+                    padding: 0 10px
+                    @include transition
+
+                    &:hover
+                        background: $brand-accent-3
+                    &:focus
+                        background: $brand-white
+                        border: 1px solid $brand-purple
+            button
+                width: 100%
+                height: 50px
+                background: $brand-purple
+                color: white
+                margin-top: 20px
+                border-radius: 10px
+                font-size: 18px
+                @include transition
+
+                &:hover
+                    background: darken($brand-purple, 4%)
+                &:active
+                    background: darken($brand-purple, 10%)
+        h4
+            width: 100%
+            text-align: center
+            border-bottom: 1px solid #0f1031
+            line-height: 0.1em
+            margin: 10px 0 20px
+            margin-top: 30px
+
+            span
+                background: #fff
+                padding: 0 10px
+
+        div
+            @include flex-center
+            width: 100%
+            height: 50px
+            margin-top: 20px
+
+            button
+                @include flex-row
+                justify-content: center
+                align-items: center
+                width: 100%
+                height: 100%
+                background: $brand-white
+                border: 1px solid $black-04
+                border-radius: 8px
+                font-size: 16px
+                box-shadow: $shadow-default
+                @include transition
+
+                &[id="Google"]
+                    background: white
+                    color: black
+                    &:hover
+                        background: darken(white, 5%)
+                    &:active
+                        border-color: $brand-purple
+                        background: darken(white, 10%)
+
+                &[id="GitHub"]
+                    background: black
+                    color: white
+                    &:hover
+                        background: lighten(black, 25%)
+                    &:active
+                        background: black
+                    svg
+                        fill: white
+
+                svg
+                    width: 20px
+                    margin-right: 8px
+
+    .info
+        @include flex-column
+        align-items: center
+        width: 20%
+        height: 600px
+        padding: 30px 10px
+        margin-left: 3%
+
+        svg
+            width: 80%
+            margin-bottom: 40px
+
+        h4
+            font-weight: 700
+            font-size: 26px
+            line-height: 26px
+            color: #0f1031
+            text-align: left
+            width: 100%
+            margin-bottom: 10px
+
+        span
+            font-size: 19px
+            line-height: 28px

@@ -1,14 +1,19 @@
-import { signIn, signOut, useSession } from "next-auth/client"
+import { useRouter } from "next/router"
+import { useSession } from "next-auth/client"
+
+import Header from "../components/Base"
+import Welcome from "../components/Welcome"
 
 export default function index() {
-	const [session] = useSession()
+	const [session, loading] = useSession()
+	if (session && !loading) {
+		const router = useRouter()
+		router.push("/calendars")
+	}
 	return (
 		<div>
-			{!session ? (
-				<button onClick={signIn}>Sign in</button>
-			) : (
-				<button onClick={signOut}>Sign out</button>
-			)}
+			<Header />
+			<Welcome />
 		</div>
 	)
 }

@@ -1,0 +1,56 @@
+@use './index.scss' as *;
+
+.welcome {
+    @include flex-column;
+    width: 100%;
+    height: calc(100% - 100px);
+    align-items: center;
+
+    div {
+        &:first-child {
+            @include flex-column;
+            width: 70%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+
+            h1 {
+                font-weight: 700;
+                font-size: 72px;
+                line-height: 108px;
+                text-align: center;
+                margin-top: 60px;
+            }
+            span {
+                font-size: 28px;
+                line-height: 42px;
+                text-align: center;
+                width: 50%;
+            }
+            button {
+                @include flex-center;
+                width: 245px;
+                height: 60px;
+                background: $brand-purple;
+                border-radius: 50px;
+                color: white;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 30px;
+                margin-top: 50px;
+                @include transition;
+
+                &:hover {
+                    background: darken($brand-purple, 10%);
+                }
+                &:active {
+                    background: darken($brand-purple, 5%);
+                }
+            }
+            svg {
+                margin-top: 40px;
+                width: 450px;
+            }
+        }
+    }
+}

@@ -34,13 +34,13 @@ export default (req, res) =>
 				from: process.env.MAIL_FROM,
 			}),
 		],
-		// pages: {
-		// 	signIn: "/auth/signin",
-		// 	signOut: "/auth/signout",
-		// 	error: "/auth/error",
-		// 	verifyRequest: "/auth/verify-request",
-		// 	newUser: null,
-		// },
+		pages: {
+			signIn: "/signin",
+			// 	signOut: "/auth/signout",
+			// 	error: "/auth/error",
+			// 	verifyRequest: "/auth/verify-request",
+			// 	newUser: null,
+		},
 		events: {
 			async signIn(message) {},
 			async signOut(message) {},
