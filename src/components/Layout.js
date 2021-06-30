@@ -1,10 +1,10 @@
 import Bar from "../components/Base/Bar"
 import scss from "../styles/app.module.scss"
 
-export default function Application({ children, user }) {
+export default function Application({ children, session }) {
 	return (
 		<div className={scss.app}>
-			<Bar image={user.image} />
+			<Bar session={session} />
 			<main>{children}</main>
 		</div>
 	)

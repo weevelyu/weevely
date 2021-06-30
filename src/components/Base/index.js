@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Logo } from "../../lib/icons/Brand"
 import scss from "../../styles/header.module.scss"
 
-export default function Header() {
+const Header = () => {
 	return (
 		<div className={scss.header}>
 			<div>
@@ -33,3 +33,5 @@ export default function Header() {
 		</div>
 	)
 }
+
+export default Header

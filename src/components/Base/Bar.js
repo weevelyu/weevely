@@ -1,50 +1,53 @@
 import { useRouter } from "next/router"
 import Link from "next/link"
 
-import scss from "../../styles/bar.module.scss"
+import styles from "../../styles/app.module.scss"
 import { Logo } from "../../lib/icons/Brand"
 import { Calendar, Shared } from "../../lib/icons/Misc"
+import AccountDropdown from "../Dropdowns/AccountDropdown"
 
-export default function Bar({ image }) {
+const Bar = ({ session }) => {
 	const { pathname } = useRouter()
 	return (
-		<div className={scss.bar}>
-			<div>
+		<div className={styles.bar}>
+			<div className={styles.barOptions}>
 				<Link href='/calendars'>
-					<button>
+					<button className={styles.barOptionsButton}>
 						<Logo />
 					</button>
 				</Link>
 				<Link href='/calendars'>
 					{pathname === "/calendars" ? (
-						<button className={scss.active}>
+						<button
+							className={(styles.active, styles.barOptionsButton)}
+						>
 							<Calendar />
 						</button>
 					) : (
-						<button>
+						<button className={styles.barOptionsButton}>
 							<Calendar />
 						</button>
 					)}
 				</Link>
 				<Link href='/shared'>
 					{pathname === "/shared" ? (
-						<button className={scss.active}>
+						<button
+							className={(styles.active, styles.barOptionsButton)}
+						>
 							<Shared />
 						</button>
 					) : (
-						<button>
+						<button className={styles.barOptionsButton}>
 							<Shared />
 						</button>
 					)}
 				</Link>
 			</div>
-			<div>
-				<Link href='/account'>
-					<button>
-						<img src={image} alt='picture' />
-					</button>
-				</Link>
+			<div className={styles.barAccount}>
+				<AccountDropdown session={session} />
 			</div>
 		</div>
 	)
 }
+
+export default Bar

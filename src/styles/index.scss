@@ -10,6 +10,7 @@ $black-004: rgba(0, 0, 0, 0.04);
 $black-accent-header: #252525;
 $black-accent-paragraph: #484848;
 $black-svg: #1a1918;
+$shadow-lighten: 0px 2px 14px rgba(0, 0, 0, 0.07);
 $shadow-default: 0px 4px 17px rgba(0, 0, 0, 0.1);
 $shadow-darken: 0px 0px 20px rgba(0, 0, 0, 0.25);
 $transition-default: 0.1s cubic-bezier(1, 0.3, 0.51, 0.6);
@@ -58,7 +59,11 @@ $transition-default: 0.1s cubic-bezier(1, 0.3, 0.51, 0.6);
     place-items: center;
 }
 
-@mixin transition() {
-    transition: $transition-default;
-    transition-property: background, border, fill;
+@mixin transition($duration: 0) {
+    @if $duration != 0 {
+        transition: $duration cubic-bezier(1, 0.3, 0.51, 0.6);
+    } @else {
+        transition: $transition-default;
+    }
+    transition-property: background, border, fill, transform, box-shadow;
 }

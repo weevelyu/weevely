@@ -9,23 +9,32 @@ async function handler(req, res) {
 			res.status(200).json(calendars)
 			break
 		case "POST":
+			const { userId } = await prisma.session.findUnique({
+				where: {
+					accessToken: req.headers.authorization,
+				},
+			})
 			const userCalendars = await prisma.calendar.count({
 				where: {
-					authorId: +req.body.authorId,
+					authorId: +userId,
 				},
 			})
 			let calendar
 			if (userCalendars === 0) {
 				calendar = await prisma.calendar.create({
 					data: {
-						authorId: req.body.authorId,
+						authorId: +userId,
 						title: req.body.title,
 						main: true,
 					},
 				})
 			} else {
 				calendar = await prisma.calendar.create({
-					data: req.body,
+					data: {
+						authorId: +userId,
+						title: req.body.title,
+						main: false,
+					},
 				})
 			}
 			res.status(201).json({

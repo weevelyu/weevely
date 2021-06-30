@@ -1,26 +1,14 @@
 import { getSession } from "next-auth/client"
 
 import Application from "../components/Layout"
-import scss from "../styles/calendars.module.scss"
+import styles from "../styles/app.module.scss"
 
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
-export default function calendars({ user }) {
+export default function calendars({ session }) {
 	return (
-		<Application user={user}>
-			<h1>Shared calendars</h1>
-			<div className={scss.calendarList}>
-				<section>
-					<div>
-						<h2>Name</h2>
-						<div>
-							<span>0 upcoming events</span>
-							<span>Private</span>
-							<span>Created a few days ago</span>
-						</div>
-					</div>
-					<button>Open</button>
-				</section>
-			</div>
+		<Application session={session}>
+			<h1 className={styles.pageTitle}>Shared calendars</h1>
+			<div className={styles.calendarList}></div>
 		</Application>
 	)
 }
@@ -33,5 +21,5 @@ export async function getServerSideProps({ req, res }) {
 		return {}
 	}
 
-	return { props: { user: session.user } }
+	return { props: { session: session } }
 }

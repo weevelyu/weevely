@@ -1,34 +1,33 @@
+import { useState, useEffect } from "react"
 import { getSession } from "next-auth/client"
+import axios from "axios"
 
 import Application from "../components/Layout"
-import scss from "../styles/calendars.module.scss"
-import { Lock, Link, Party, Time } from "../lib/icons/Misc"
+import CalendarList from "../components/Calendars/CalendarList"
+import NewCalendar from "../components/Calendars/NewCalendar"
+import styles from "../styles/app.module.scss"
 
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
-export default function calendars({ user }) {
+export default function calendars({ session }) {
+	const [calendars, setCalendars] = useState([])
+	useEffect(() => {
+		let cancel
+		axios
+			.get("http://localhost:3000/api/calendars", {
+				cancelToken: new axios.CancelToken((c) => (cancel = c)),
+			})
+			.then((result) => {
+				setCalendars(result.data.map((p) => p))
+			})
+
+		return () => cancel()
+	}, [calendars])
 	return (
-		<Application user={user}>
-			<h1>Your calendars</h1>
-			<div className={scss.calendarList}>
-				<section>
-					<div>
-						<h2>Name</h2>
-						<div>
-							<span>
-								<Party />0 upcoming events
-							</span>
-							<span>
-								<Lock />
-								Private
-							</span>
-							<span>
-								<Time />
-								Created a few days ago
-							</span>
-						</div>
-					</div>
-					<button>Open</button>
-				</section>
+		<Application session={session}>
+			<h1 className={styles.pageTitle}>Your calendars</h1>
+			<div className={styles.calendarList}>
+				<CalendarList calendars={calendars} />
+				<NewCalendar calendars={calendars} />
 			</div>
 		</Application>
 	)
@@ -42,5 +41,5 @@ export async function getServerSideProps({ req, res }) {
 		return {}
 	}
 
-	return { props: { user: session.user } }
+	return { props: { session: session } }
 }

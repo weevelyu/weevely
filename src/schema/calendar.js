@@ -1,7 +1,6 @@
 import { object, string, number, boolean } from "yup"
 
 const createSchema = object({
-	authorId: number().required().min(1),
 	title: string().optional().trim().max(16),
 })
 
