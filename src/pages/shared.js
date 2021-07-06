@@ -6,7 +6,7 @@ import styles from "../styles/app.module.scss"
 /** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
 export default function calendars({ session }) {
 	return (
-		<Application session={session}>
+		<Application session={session} title='Shared calendars'>
 			<h1 className={styles.pageTitle}>Shared calendars</h1>
 			<div className={styles.calendarList}></div>
 		</Application>

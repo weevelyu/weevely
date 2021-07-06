@@ -62,8 +62,8 @@ export default (req, res) =>
 			secret: process.env.JWT_SECRET,
 		},
 		session: {
-			maxAge: 3 * 24 * 60 * 60,
-			updateAge: 12 * 60 * 60,
+			maxAge: 1 * 24 * 60 * 60,
+			updateAge: 6 * 60 * 60,
 		},
 		adapter: PrismaAdapter(prisma),
 		database: process.env.DATABASE_URL,

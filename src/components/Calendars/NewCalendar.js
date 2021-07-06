@@ -3,7 +3,7 @@ import { useSession } from "next-auth/client"
 import { Plus } from "../../lib/icons/Misc"
 import styles from "../../styles/app.module.scss"
 
-const NewCalendar = ({ calendars }) => {
+const NewCalendar = ({ setCalendars }) => {
 	const [session, loading] = useSession()
 
 	const addCalendar = () => {
@@ -17,11 +17,18 @@ const NewCalendar = ({ calendars }) => {
 				data: {},
 				url: `http://localhost:3000/api/calendars`,
 			}
-			console.log(api)
-			const response = axios.post(api.url, api.data, {
-				headers: api.headers,
-			})
-			calendars.push(response)
+			axios
+				.post(api.url, api.data, {
+					headers: api.headers,
+				})
+				.then((response) => {
+					setCalendars((prevState) => [
+						...prevState,
+						Object.assign(response.data.calendar, {
+							events: { length: 0 },
+						}),
+					])
+				})
 		}
 	}
 	return (

@@ -1,4 +1,4 @@
-export function Booking(props) {
+export const Booking = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@ export function Booking(props) {
   )
 }
 
-export function Checking(props) {
+export const Checking = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -296,7 +296,7 @@ export function Checking(props) {
   )
 }
 
-export function Events(props) {
+export const Events = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

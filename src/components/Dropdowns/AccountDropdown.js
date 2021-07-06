@@ -22,6 +22,11 @@ const AccountDropdown = ({ session }) => {
 							Account
 						</button>
 					</Link>
+					<Link href={`/user/${session.user.name}`}>
+						<button className={styles.dropdownBarOption}>
+							Public profile
+						</button>
+					</Link>
 					<button
 						className={styles.dropdownBarOption}
 						name='danger'

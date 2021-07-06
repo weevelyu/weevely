@@ -6,7 +6,7 @@ import CalendarModal from "../Modals/CalendarModal"
 import styles from "../../styles/app.module.scss"
 import { Dots } from "../../lib/icons/Misc"
 
-const CalendarDrowdown = (calendar) => {
+const CalendarDrowdown = (props) => {
 	const [editing, setEditing] = useState(false)
 	const [toggle, setToggle] = useState(false)
 	const [session, loading] = useSession()
@@ -19,11 +19,14 @@ const CalendarDrowdown = (calendar) => {
 				Accept: "application/json",
 				Authorization: session.accessToken,
 			},
-			url: `http://localhost:3000/api/calendars/${calendar.calendar.id}`,
+			url: `http://localhost:3000/api/calendars/${props.calendar.id}`,
 		}
 		axios.delete(api.url, {
 			headers: api.headers,
 		})
+		props.setCalendars((prevState) =>
+			prevState.filter((item) => item.id !== props.calendar.id)
+		)
 	}
 
 	const editRecord = (fin) => {
@@ -47,7 +50,7 @@ const CalendarDrowdown = (calendar) => {
 					>
 						Edit
 					</button>
-					{calendar.calendar.main || (
+					{props.calendar.main || (
 						<button
 							className={styles.dropdownOption}
 							onClick={() => deleteRecord()}
@@ -57,9 +60,10 @@ const CalendarDrowdown = (calendar) => {
 						</button>
 					)}
 					<CalendarModal
-						calendar={calendar}
+						calendar={props.calendar}
 						editing={editing}
 						editRecord={editRecord}
+						setCalendars={props.setCalendars}
 					/>
 				</div>
 			)}

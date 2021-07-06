@@ -1,8 +1,14 @@
 import CalendarElement from "./CalendarElement"
 
-const CalendarList = ({ calendars }) => {
+const CalendarList = ({ calendars, setCalendars }) => {
 	return calendars.map((calendar) => {
-		return <CalendarElement key={calendar.id} calendar={calendar} />
+		return (
+			<CalendarElement
+				key={calendar.id}
+				calendar={calendar}
+				setCalendars={setCalendars}
+			/>
+		)
 	})
 }
 

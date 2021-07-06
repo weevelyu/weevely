@@ -17,9 +17,10 @@ const Bar = ({ session }) => {
 					</button>
 				</Link>
 				<Link href='/calendars'>
-					{pathname === "/calendars" ? (
+					{pathname.match(/^\/calendars/) ? (
 						<button
-							className={(styles.active, styles.barOptionsButton)}
+							className={styles.barOptionsButton}
+							style={{ boxShadow: "#6775ee 4px 0px 0px inset" }}
 						>
 							<Calendar />
 						</button>
@@ -30,9 +31,10 @@ const Bar = ({ session }) => {
 					)}
 				</Link>
 				<Link href='/shared'>
-					{pathname === "/shared" ? (
+					{pathname.match(/^\/shared/) ? (
 						<button
-							className={(styles.active, styles.barOptionsButton)}
+							className={styles.barOptionsButton}
+							style={{ boxShadow: "#6775ee 4px 0px 0px inset" }}
 						>
 							<Shared />
 						</button>

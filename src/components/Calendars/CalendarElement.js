@@ -1,26 +1,30 @@
+import Link from "next/link"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 
-import { Lock, Link, Party, Time } from "../../lib/icons/Misc"
+import { Lock, Link as LinkSVG, Party, Time } from "../../lib/icons/Misc"
 import CalendarDrowdown from "../Dropdowns/CalendarDropdown"
 import styles from "../../styles/app.module.scss"
 
-const CalendarElement = ({ calendar }) => {
+const CalendarElement = ({ calendar, setCalendars }) => {
 	dayjs.extend(relativeTime)
 	return (
 		<div className={styles.calendarElement}>
 			<div className={styles.calendarData}>
 				<h2 className={styles.calendarTitle}>
 					{calendar.title}
-					<CalendarDrowdown calendar={calendar} />
+					<CalendarDrowdown
+						calendar={calendar}
+						setCalendars={setCalendars}
+					/>
 				</h2>
 				<span className={styles.calendarSpan}>
 					<Party />
-					{calendar.events} upcoming events
+					{calendar.events.length} upcoming events
 				</span>
 				{calendar.shared ? (
 					<span className={styles.calendarSpan}>
-						<Link />
+						<LinkSVG />
 						Public
 					</span>
 				) : (
@@ -34,7 +38,9 @@ const CalendarElement = ({ calendar }) => {
 					Created {dayjs(calendar.createdAt).fromNow()}
 				</span>
 			</div>
-			<button className={styles.calendarOpenButton}>Open</button>
+			<Link href={`/calendars/${calendar.id}`}>
+				<button className={styles.calendarOpenButton}>Open</button>
+			</Link>
 		</div>
 	)
 }

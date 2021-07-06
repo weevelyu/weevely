@@ -17,9 +17,14 @@ async function handler(req, res) {
 			break
 		case "PATCH":
 			try {
+				const { userId } = await prisma.session.findUnique({
+					where: {
+						accessToken: req.headers.authorization,
+					},
+				})
 				const updateUser = await prisma.user.update({
 					where: {
-						id: +query.id,
+						id: +userId,
 					},
 					data: body,
 				})

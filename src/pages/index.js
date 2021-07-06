@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { useRouter } from "next/router"
 import { useSession } from "next-auth/client"
 
@@ -11,9 +12,18 @@ export default function index() {
 		router.push("/calendars")
 	}
 	return (
-		<div>
-			<Header />
-			<Welcome />
-		</div>
+		<>
+			<Head>
+				<title>Weevely</title>
+				<meta
+					name='viewport'
+					content='initial-scale=1.0, width=device-width'
+				/>
+			</Head>
+			<div>
+				<Header />
+				<Welcome />
+			</div>
+		</>
 	)
 }

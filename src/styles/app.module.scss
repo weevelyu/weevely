@@ -1,241 +1,418 @@
 @use 'index.scss' as *;
 
 .app {
-    @include flex-row;
-    width: 100%;
-    height: 100%;
-    background-color: $brand-white;
+	@include flex-row;
+	width: 100%;
+	height: 100%;
+	background-color: $brand-white;
 
-    .bar {
-        @include flex-column;
-        width: 56px;
-        height: 100vh;
-        border-right: 2px solid darken($brand-white, 2%);
-        justify-content: space-between;
-        align-items: center;
-        background-color: white;
-        .barOptions {
-            width: 100%;
-            .barOptionsButton {
-                width: 100%;
-                height: 50px;
-                @include transition;
-                border-radius: 0%;
-                &:first-child {
-                    svg {
-                        width: 40px;
-                        height: 40px;
-                    }
-                    height: 100px;
-                }
-                svg {
-                    width: 22px;
-                    height: 22px;
-                    fill: darken($brand-accent-1, 8%);
-                }
-                &:hover {
-                    background: $brand-accent-3;
-                }
-            }
-        }
-        .barAccount {
-            width: 100%;
-            .barAccountButton {
-                width: 100%;
-                height: 80px;
-                img {
-                    width: 34px;
-                    height: 34px;
-                    border: 2px solid $brand-purple;
-                    border-radius: 50%;
-                }
-                @include transition;
-                &:hover {
-                    background-color: $brand-accent-3;
-                }
-            }
-        }
-        .dropdownBarOptions {
-            @include flex-column;
-            position: absolute;
-            width: 100px;
-            margin-top: -80px;
-            margin-left: 56px;
-            background-color: $brand-white;
-            border-radius: 4px;
-            border: 1px solid $brand-accent-1;
-            box-shadow: $shadow-lighten;
-            
-            .dropdownBarOption {
-                width: 100%;
-                height: 30px;
-                @include transition(0.07s);
-                &:hover {
-                    background-color: $brand-accent-3;
-                    &[name='danger'] {
-                        background-color: rgba(255, 0, 0, 0.6);
-                        color: white;
-                    }
-                }
-            }
-        }
-    }
+	.bar {
+		@include flex-column;
+		width: 56px;
+		min-height: 100vh;
+		border-right: 2px solid darken($brand-white, 2%);
+		justify-content: space-between;
+		align-items: center;
+		background-color: white;
+		.barOptions {
+			width: 100%;
+			.barOptionsButton {
+				width: 100%;
+				height: 50px;
+				@include transition;
+				border-radius: 0%;
+				&:first-child {
+					svg {
+						width: 40px;
+						height: 40px;
+					}
+					height: 100px;
+				}
+				svg {
+					width: 22px;
+					height: 22px;
+					fill: darken($brand-accent-1, 8%);
+				}
+				&:hover {
+					background: $brand-accent-3;
+				}
+			}
+		}
+		.barAccount {
+			width: 100%;
+			.barAccountButton {
+				width: 100%;
+				height: 80px;
+				img {
+					width: 34px;
+					height: 34px;
+					border: 2px solid $brand-purple;
+					border-radius: 50%;
+				}
+				@include transition;
+				&:hover {
+					background-color: $brand-accent-3;
+				}
+			}
+		}
+		.dropdownBarOptions {
+			@include flex-column;
+			position: absolute;
+			width: 100px;
+			margin-top: -100px;
+			margin-left: 56px;
+			background-color: $brand-white;
+			border-radius: 4px;
+			border: 1px solid $brand-accent-1;
+			box-shadow: $shadow-lighten;
 
-    .active {
-        box-shadow: $brand-purple 4px 0px 0px inset;
-    }
+			.dropdownBarOption {
+				width: 100%;
+				height: 30px;
+				@include transition(0.07s);
+				&:hover {
+					background-color: $brand-accent-3;
+					&[name="danger"] {
+						background-color: rgba(255, 0, 0, 0.6);
+						color: white;
+					}
+				}
+			}
+		}
+	}
 
-    main {
-        @include flex-column;
-        width: calc(100% - 56px);
-        height: 100%;
+	main {
+		@include flex-column;
+		width: calc(100% - 56px);
+		height: 100%;
 
-        .pageTitle {
-            @include font-proxima;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            height: 100px;
-            font-size: 48px;
-            line-height: 72px;
-            padding-left: 40px;
-            background: white;
-            border-bottom: 2px solid darken($brand-white, 2%);
-        }
+		.pageTitle {
+			@include font-proxima;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			height: 100px;
+			font-size: 48px;
+			line-height: 72px;
+			padding-left: 40px;
+			background: white;
+			border-bottom: 2px solid darken($brand-white, 2%);
+			cursor: default;
+		}
 
-        .calendarList {
-            @include flex-row;
-            flex-wrap: wrap;
-            width: 100%;
-            height: calc(100% - 100px);
-            overflow: hidden scroll;
-            scroll-behavior: smooth;
-            padding: 30px;
-            .calendarElement {
-                @include flex-column;
-                justify-content: space-between;
-                width: 340px;
-                height: 340px;
-                padding: 24px;
-                margin-right: 40px;
-                margin-bottom: 30px;
-                background-color: white;
-                box-shadow: $shadow-default;
-                border-radius: 12px;
-                @include transition(0.2s);
-                &:hover {
-                    box-shadow: $shadow-darken;
-                    transform: translateY(-5px)
-                }
-                .calendarData {
-                    @include flex-column;
-                    .calendarTitle {
-                        @include flex-row;
-                        justify-content: space-between;
-                        width: 100%;
-                        margin-bottom: 40px;
-                        .calendarButtonMore {
-                            width: 16px;
-                            height: 16px;
-                            svg {
-                                fill: $black-07;
-                                @include transition;
-                            }
-                            &:hover {
-                                background: transparent;
-                                svg {
-                                    fill: $brand-purple;
-                                }
-                            }
-                        }
-                    }
-                    .calendarSpan {
-                        @include flex-row;
-                        align-items: center;
-                        margin-top: 14px;
-                        &:first-child {
-                            margin: 0;
-                        }
-                        font-weight: 400;
-                        font-size: 16px;
-    
-                        svg {
-                            width: 16px;
-                            height: 16px;
-                            fill: $brand-purple;
-                            margin-right: 6px;
-                        }
-                    }
-                }
-                .calendarOpenButton {
-                    width: 100%;
-                    height: 40px;
-                    background: $brand-purple;
-                    color: white;
-                    font-size: 15px;
-                    font-weight: 600;
-                    letter-spacing: 1px;
-                    border-radius: 10px;
-                    box-shadow: $shadow-default;
-                    @include transition;
-                    &:hover {
-                        background: darken($brand-purple, 6%);
-                    }
-                }
-            }
-        
-            .calendarCreateBlock {
-                width: 340px;
-                height: 340px;
-                border: 1px solid $brand-accent-3;
-                border-radius: 12px;
-                @include flex-center;
-                button {
-                    color: $black-07;
-                    @include transition;
-                    font-size: 14px;
-                    font-weight: 600;
-                    width: 54px;
-                    height: 54px;
-                    background: transparent;
-                    border-radius: 50%;
-                    svg {
-                        width: 24px;
-                        height: 24px;
-                        fill: $brand-accent-1;
-                    }
-                    &:hover {
-                        background: $brand-accent-3;
-                        svg {
-                            fill: $brand-purple;
-                        }
-                    }
-                }
-            }
+		.calendarsPage {
+			@include flex-row;
+			flex-wrap: wrap;
+			width: 100%;
+			height: 100%;
+			overflow: hidden scroll;
+			scroll-behavior: smooth;
+			padding: 30px;
+			.calendarElement {
+				@include flex-column;
+				justify-content: space-between;
+				width: 340px;
+				height: 340px;
+				padding: 24px;
+				margin-right: 40px;
+				margin-bottom: 30px;
+				background-color: white;
+				box-shadow: $shadow-default;
+				border-radius: 12px;
+				@include transition(0.2s);
+				&:hover {
+					box-shadow: $shadow-darken;
+					transform: translateY(-5px);
+				}
+				.calendarData {
+					@include flex-column;
+					.calendarTitle {
+						@include flex-row;
+						justify-content: space-between;
+						width: 100%;
+						margin-bottom: 40px;
+						cursor: default;
+						.calendarButtonMore {
+							width: 16px;
+							height: 16px;
+							svg {
+								fill: $black-07;
+								@include transition;
+							}
+							&:hover {
+								background: transparent;
+								svg {
+									fill: $brand-purple;
+								}
+							}
+						}
+					}
+					.calendarSpan {
+						@include flex-row;
+						align-items: center;
+						margin-top: 14px;
+						&:first-child {
+							margin: 0;
+						}
+						font-weight: 400;
+						font-size: 16px;
 
-            .dropdownOptions {
-                @include flex-column;
-                position: absolute;
-                width: 100px;
-                margin: 30px 0 0 200px;
-                background-color: $brand-white;
-                border-radius: 4px;
-                border: 1px solid $brand-accent-1;
-                box-shadow: $shadow-lighten;
-                
-                .dropdownOption {
-                    width: 100%;
-                    height: 30px;
-                    @include transition(0.07s);
-                    &:hover {
-                        background-color: $brand-accent-3;
-                        &[name='danger'] {
-                            background-color: rgba(255, 0, 0, 0.6);
-                            color: white;
-                        }
-                    }
-                }
-            }
-        }
-    }
+						svg {
+							width: 16px;
+							height: 16px;
+							fill: $brand-purple;
+							margin-right: 6px;
+						}
+					}
+				}
+				.calendarOpenButton {
+					width: 100%;
+					height: 40px;
+					background: $brand-purple;
+					color: white;
+					font-size: 15px;
+					font-weight: 600;
+					letter-spacing: 1px;
+					border-radius: 10px;
+					box-shadow: $shadow-default;
+					@include transition;
+					&:hover {
+						background: darken($brand-purple, 6%);
+					}
+				}
+			}
+
+			.calendarCreateBlock {
+				width: 340px;
+				height: 340px;
+				border: 1px solid $brand-accent-3;
+				border-radius: 12px;
+				@include flex-center;
+				button {
+					color: $black-07;
+					@include transition;
+					font-size: 14px;
+					font-weight: 600;
+					width: 54px;
+					height: 54px;
+					background: transparent;
+					border-radius: 50%;
+					svg {
+						width: 24px;
+						height: 24px;
+						fill: $brand-accent-1;
+					}
+					&:hover {
+						background: $brand-accent-3;
+						svg {
+							fill: $brand-purple;
+						}
+					}
+				}
+			}
+
+			.dropdownOptions {
+				@include flex-column;
+				position: absolute;
+				width: 100px;
+				margin: 30px 0 0 200px;
+				background-color: $brand-white;
+				border-radius: 4px;
+				border: 1px solid $brand-accent-1;
+				box-shadow: $shadow-lighten;
+
+				.dropdownOption {
+					width: 100%;
+					height: 30px;
+					@include transition(0.07s);
+					&:hover {
+						background-color: $brand-accent-3;
+						&[name="danger"] {
+							background-color: rgba(255, 0, 0, 0.6);
+							color: white;
+						}
+					}
+				}
+			}
+		}
+
+		.userPage {
+			@include flex-row;
+			width: 100%;
+			padding: 30px;
+			.userBanner {
+				width: 400px;
+				background: white;
+				border-radius: 20px;
+				box-shadow: $shadow-default;
+				.userBannerImageBlock {
+					width: 100%;
+					height: 100px;
+					background: $brand-purple;
+					border-radius: 20px 20px 0 0;
+					.userBannerImage {
+						border-radius: 10px;
+						margin: 40px 0 0 20px;
+						width: 110px;
+					}
+				}
+				.userBannerDataBlock {
+					width: 100%;
+					height: calc(100% - 100px);
+					padding: 60px 20px 20px 20px;
+					.userBannerDataName {
+						font-size: 24px;
+					}
+					.userBannerDataStatus {
+						font-size: 16px;
+						color: $black-04;
+						&[id="online"] {
+							color: $brand-purple;
+						}
+					}
+					.userBannerDataStat {
+						@include flex-column;
+						width: 100%;
+						margin: 20px 0;
+						.userBannerDataStatTitle {
+							font-weight: normal;
+							font-size: 14px;
+							line-height: 20px;
+						}
+						div {
+							@include flex-row;
+							svg {
+								width: 16px;
+								margin-right: 4px;
+								fill: $brand-purple;
+							}
+							.userBannerDataStatContent {
+								font-size: 16px;
+								line-height: 18px;
+							}
+						}
+					}
+				}
+				.userBannerOwnerButton {
+					@include grid-center;
+					width: 100%;
+					height: 34px;
+					background: $brand-purple;
+					color: white;
+					border-radius: 8px;
+					margin-top: 20px;
+					font-size: 14px;
+					letter-spacing: 0.6px;
+					box-shadow: $shadow-default;
+					@include transition;
+					transition-property: background;
+					&:hover {
+						background: darken($brand-purple, 4%);
+					}
+				}
+			}
+			.userSharedCalendars {
+				@include flex-center;
+				width: calc(100% - 400px);
+				margin-left: 40px;
+			}
+		}
+
+		.accountPage {
+			@include flex-column;
+			width: 100%;
+			padding: 30px;
+			.accountWarning {
+				@include flex-center;
+				align-items: flex-start;
+				width: 100%;
+				height: 40px;
+				font-weight: 300;
+				color: $brand-purple;
+				line-height: 14px;
+				svg {
+					width: 14px;
+					margin-right: 6px;
+					fill: $brand-purple;
+				}
+			}
+			.accountPageMain {
+				@include flex-row;
+				width: 100%;
+				justify-content: center;
+				.accountImageBlock {
+					@include flex-column;
+					margin-right: 40px;
+					img {
+						width: 200px;
+						border-radius: 14px;
+						border: 3px solid $brand-purple;
+					}
+					input {
+						display: none;
+					}
+					label {
+						color: $brand-purple;
+						height: 30px;
+						display: grid;
+						place-items: center;
+						border-radius: 6px;
+						font-size: 14px;
+						margin: 10px 0;
+						cursor: pointer;
+						@include transition;
+						transition-property: background;
+						&:hover {
+							background: $brand-accent-3;
+						}
+					}
+				}
+				.accountDataBlock {
+					@include flex-column;
+					label {
+						font-size: 14px;
+						color: $black-07;
+					}
+					input {
+						width: 300px;
+						height: 30px;
+						font-size: 16px;
+						border-radius: 6px;
+						border: 1px solid $brand-accent-2;
+						margin-top: 6px;
+						padding: 0 10px;
+						margin-bottom: 20px;
+						@include transition(0.06s);
+						transition-property: background, border;
+						&:hover {
+							background: $brand-accent-3;
+						}
+						&:focus {
+							border-color: $brand-purple;
+							background-color: white;
+						}
+						&:disabled {
+							border: 1px solid $brand-accent-3;
+							&:hover {
+								background-color: rgba(255, 149, 149, 0.4);
+							}
+						}
+						&[type="submit"] {
+							background-color: $brand-purple;
+							height: 40px;
+							color: white;
+							cursor: pointer;
+							box-shadow: $shadow-default;
+							&:hover {
+								background: darken($brand-purple, 4%);
+							}
+							&:active {
+								background: darken($brand-purple, 6%);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }

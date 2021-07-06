@@ -1,8 +1,8 @@
 import axios from "axios"
-import { useState } from "react"
 import { useSession } from "next-auth/client"
+import { useState } from "react"
+import { useRouter } from "next/router"
 import Modal from "react-modal"
-
 import { Close } from "../../lib/icons/Misc"
 
 const style = {
@@ -45,9 +45,10 @@ const style = {
 	},
 }
 
-const CalendarModal = ({ calendar, editing, editRecord }) => {
+const CalendarModal = ({ calendar, editing, editRecord, setCalendars }) => {
 	const [session, loading] = useSession()
-	const [title, setTitle] = useState(calendar.calendar.title)
+	const router = useRouter()
+	const [title, setTitle] = useState(calendar.title)
 
 	const applyChanges = () => {
 		if (loading) return
@@ -61,13 +62,16 @@ const CalendarModal = ({ calendar, editing, editRecord }) => {
 			data: {
 				title: title,
 			},
-			url: `http://localhost:3000/api/calendars/${calendar.calendar.id}`,
+			url: `http://localhost:3000/api/calendars/${calendar.id}`,
 		}
 		axios
 			.patch(api.url, api.data, {
 				headers: api.headers,
 			})
-			.finally(() => editRecord(true))
+			.finally(() => {
+				editRecord(true)
+				router.reload()
+			})
 	}
 
 	const handleChange = (target) => {
@@ -75,12 +79,17 @@ const CalendarModal = ({ calendar, editing, editRecord }) => {
 	}
 
 	return (
-		<Modal isOpen={editing} contentLabel='Example Modal' style={style}>
+		<Modal
+			isOpen={editing}
+			contentLabel='Example Modal'
+			style={style}
+			ariaHideApp={false}
+		>
 			<button onClick={() => editRecord(true)}>
 				<Close width={18} fill='rgba(0, 0, 0, 0.7)' />
 			</button>
 			<form style={style.form}>
-				<label for='calendarTitle' style={style.label}>
+				<label htmlFor='calendarTitle' style={style.label}>
 					Calendar Title
 					<input
 						style={style.input}
