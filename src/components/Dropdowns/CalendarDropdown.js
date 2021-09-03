@@ -19,7 +19,7 @@ const CalendarDrowdown = (props) => {
 				Accept: "application/json",
 				Authorization: session.accessToken,
 			},
-			url: `http://localhost:3000/api/calendars/${props.calendar.id}`,
+			url: `http://paxanddos.ddns.net:3000/api/calendars/${props.calendar.id}`,
 		}
 		axios.delete(api.url, {
 			headers: api.headers,

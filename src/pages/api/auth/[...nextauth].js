@@ -45,6 +45,14 @@ export default (req, res) =>
 			async signIn(message) {},
 			async signOut(message) {},
 			async createUser(message) {
+				await prisma.user.update({
+					where: {
+						id: message.id,
+					},
+					data: {
+						shareId: Math.random().toString(36).substring(2),
+					},
+				})
 				await prisma.calendar.create({
 					data: {
 						authorId: message.id,
@@ -67,6 +75,6 @@ export default (req, res) =>
 		},
 		adapter: PrismaAdapter(prisma),
 		database: process.env.DATABASE_URL,
-		debug: process.env.NODE_ENV === "development",
+		debug: false, // process.env.NODE_ENV === "development",
 		secret: process.env.AUTH_SECRET,
 	})

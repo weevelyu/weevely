@@ -31,10 +31,13 @@
 				svg {
 					width: 22px;
 					height: 22px;
-					fill: darken($brand-accent-1, 8%);
+					fill: lighten($brand-purple, 5%);
 				}
 				&:hover {
 					background: $brand-accent-3;
+				}
+				&:active {
+					background: $brand-accent-2;
 				}
 			}
 		}
@@ -409,6 +412,206 @@
 							&:active {
 								background: darken($brand-purple, 6%);
 							}
+						}
+					}
+				}
+			}
+		}
+
+		.calendarPage {
+			@include flex-row;
+			width: 100%;
+			padding: 30px;
+			.bigCalendar {
+				width: 600px;
+				height: 100%;
+				background: white;
+				border-radius: 20px;
+				box-shadow: $shadow-default;
+				.dateSwitcher {
+					@include flex-row;
+					align-items: center;
+					justify-content: space-between;
+					width: 100%;
+					height: 70px;
+					padding: 0 26px;
+					.dateMonth {
+						font-size: 28px;
+						line-height: 36px;
+						font-weight: 600;
+					}
+					.dateButtons {
+						.dateSwitch {
+							width: 20px;
+							height: 20px;
+							svg {
+								width: 100%;
+								height: 100%;
+								transform: rotate(180deg);
+								@include transition;
+								transition-property: fill;
+							}
+							&:last-child {
+								svg {
+									transform: rotate(0);
+								}
+								margin-left: 20px;
+							}
+							&:hover {
+								svg {
+									fill: $brand-purple;
+								}
+							}
+							&:active {
+								svg {
+									fill: $brand-accent-1;
+								}
+							}
+						}
+					}
+				}
+				.dateList {
+					width: 100%;
+					height: calc(100% - 50px);
+					.dateHeading {
+						width: 100%;
+						height: 20px;
+						display: grid;
+						grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+						grid-template-rows: 1fr;
+						gap: 0px 0px;
+						grid-template-areas: ". . . . . . .";
+						span {
+							@include flex-center;
+							font-style: normal;
+							font-weight: normal;
+							font-size: 14px;
+							line-height: 21px;
+						}
+					}
+					.dateContent {
+						width: 100%;
+						height: calc(100% - 40px);
+						display: grid;
+						grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+						grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+						gap: 0px 0px;
+						grid-template-areas:
+							". . . . . . ."
+							". . . . . . ."
+							". . . . . . ."
+							". . . . . . ."
+							". . . . . . .";
+						.dateElement {
+							height: 100px;
+							border-radius: 0;
+							background: transparent;
+							@include flex-center;
+							font-size: 20px;
+							line-height: 27px;
+							@include transition;
+							transition-property: background;
+							&:hover {
+								background: $brand-accent-2;
+							}
+							&:active {
+								background: $brand-accent-3;
+							}
+							&[name="event"] {
+								background: $brand-purple;
+								color: white;
+							}
+							&[name="today"] {
+								background: $brand-accent-1;
+							}
+						}
+					}
+				}
+			}
+			.eventList {
+				width: calc(100% - 600px);
+				height: 100%;
+				margin-left: 40px;
+				.eventListDate {
+					margin-bottom: 30px;
+				}
+				.eventListItems {
+					width: 100%;
+					height: 600px;
+					overflow: hidden auto;
+					&::-webkit-scrollbar {
+						width: 8px;
+					}
+					&::-webkit-scrollbar-track {
+						background: $brand-accent-3;
+						border-radius: 10px;
+					}
+					&::-webkit-scrollbar-thumb {
+						background: $brand-accent-1;
+						border-radius: 10px;
+					}
+					&::-webkit-scrollbar-thumb:hover {
+						background: $brand-purple;
+					}
+					.eventElement {
+						@include flex-row;
+						justify-content: space-between;
+						align-items: center;
+						width: 100%;
+						height: 100px;
+						border-bottom: 1px solid $brand-accent-3;
+						cursor: pointer;
+						@include transition;
+						transition-property: background;
+						.eventElementWrapper {
+							width: 100%;
+							height: 100%;
+							@include flex-row;
+							align-items: center;
+							.eventElementTarget {
+								font-weight: 500;
+								font-size: 26px;
+								line-height: 39px;
+								margin-right: 20px;
+							}
+							.eventElementData {
+								@include flex-column;
+								.eventElementCategory {
+									font-weight: 300;
+									font-size: 18px;
+									line-height: 20px;
+									opacity: 0.5;
+								}
+								.eventElementTitle {
+									font-size: 24px;
+									line-height: 30px;
+								}
+								.eventElementDuration {
+									font-size: 16px;
+									opacity: 0.7;
+								}
+							}
+						}
+						.eventElementArrow {
+							@include flex-center;
+							width: 50px;
+							height: 50px;
+							svg {
+								width: 40%;
+								transform: rotate(-90deg);
+								@include transition;
+								transition-property: fill;
+							}
+						}
+						&:hover {
+							.eventElementArrow {
+								svg {
+									fill: $brand-purple;
+								}
+							}
+						}
+						&:active {
+							background: $brand-accent-3;
 						}
 					}
 				}

@@ -16,6 +16,7 @@ async function handler(req, res) {
 					calendars: {
 						create: [{ title: "My calendar", main: true }],
 					},
+					shareId: Math.random().toString(36).substring(2),
 				},
 			})
 			res.status(201).json({

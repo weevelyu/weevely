@@ -62,7 +62,7 @@ const CalendarModal = ({ calendar, editing, editRecord, setCalendars }) => {
 			data: {
 				title: title,
 			},
-			url: `http://localhost:3000/api/calendars/${calendar.id}`,
+			url: `http://paxanddos.ddns.net:3000/api/calendars/${calendar.id}`,
 		}
 		axios
 			.patch(api.url, api.data, {

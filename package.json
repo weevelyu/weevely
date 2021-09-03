@@ -36,23 +36,23 @@
   },
   "homepage": "https://github.com/PAXANDDOS/weevely-next#readme",
   "dependencies": {
-    "@ipregistry/client": "^4.0.0",
-    "@next-auth/prisma-adapter": "^0.4.4-canary.64",
-    "@prisma/client": "^2.25.0",
+    "@ipregistry/client": "^4.1.0",
+    "@next-auth/prisma-adapter": "^0.5.4",
+    "@prisma/client": "^2.30.3",
     "axios": "^0.21.1",
-    "dayjs": "^1.10.5",
+    "dayjs": "^1.10.6",
     "holidayapi": "^5.0.0",
-    "next": "^11.0.1",
-    "next-auth": "^3.27.0",
+    "next": "^11.1.2",
+    "next-auth": "^3.29.0",
     "nprogress": "^0.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
-    "sass": "^1.35.1",
+    "sass": "^1.39.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "babel-plugin-superjson-next": "^0.3.0",
-    "prisma": "^2.25.0"
+    "babel-plugin-superjson-next": "^0.3.1",
+    "prisma": "^2.30.3"
   }
 }

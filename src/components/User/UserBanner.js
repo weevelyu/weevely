@@ -28,7 +28,7 @@ const UserBanner = ({ user, owner }) => {
 						Offline
 					</span>
 				)}
-				<UserStat title='Share ID' content='qweW' />
+				<UserStat title='Share ID' content={user.shareId} />
 				<UserStat
 					title='Member for'
 					content={dayjs(user.createdAt).fromNow(true)}

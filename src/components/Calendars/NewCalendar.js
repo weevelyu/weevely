@@ -15,7 +15,7 @@ const NewCalendar = ({ setCalendars }) => {
 					Authorization: session.accessToken,
 				},
 				data: {},
-				url: `http://localhost:3000/api/calendars`,
+				url: `http://paxanddos.ddns.net:3000/api/calendars`,
 			}
 			axios
 				.post(api.url, api.data, {

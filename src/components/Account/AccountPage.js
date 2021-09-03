@@ -32,7 +32,7 @@ export const AccountPage = ({ user, session }) => {
 			data: {
 				name: name,
 			},
-			url: `http://localhost:3000/api/users/${user.id}`,
+			url: `http://paxanddos.ddns.net:3000/api/users/${user.id}`,
 		}
 		axios.patch(api.url, api.data, {
 			headers: api.headers,
