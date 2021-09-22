@@ -38,9 +38,9 @@
   "dependencies": {
     "@ipregistry/client": "^4.1.0",
     "@next-auth/prisma-adapter": "^0.5.4",
-    "@prisma/client": "^2.30.3",
-    "axios": "^0.21.1",
-    "dayjs": "^1.10.6",
+    "@prisma/client": "^3.1.1",
+    "axios": "^0.21.4",
+    "dayjs": "^1.10.7",
     "holidayapi": "^5.0.0",
     "next": "^11.1.2",
     "next-auth": "^3.29.0",
@@ -48,11 +48,11 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
-    "sass": "^1.39.0",
+    "sass": "^1.42.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "babel-plugin-superjson-next": "^0.3.1",
-    "prisma": "^2.30.3"
+    "babel-plugin-superjson-next": "^0.4.1",
+    "prisma": "^3.1.1"
   }
 }
