@@ -2,7 +2,7 @@ import Head from "next/head"
 import Bar from "../components/Base/Bar"
 import scss from "../styles/app.module.scss"
 
-export default function Application({ children, session, title }) {
+export default function Application({ children, user, title }) {
 	return (
 		<>
 			<Head>
@@ -13,7 +13,7 @@ export default function Application({ children, session, title }) {
 				/>
 			</Head>
 			<div className={scss.app}>
-				<Bar session={session} />
+				<Bar user={user} />
 				<main>{children}</main>
 			</div>
 		</>

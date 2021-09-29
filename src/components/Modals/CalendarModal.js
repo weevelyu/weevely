@@ -1,5 +1,4 @@
 import axios from "axios"
-import { useSession } from "next-auth/client"
 import { useState } from "react"
 import { useRouter } from "next/router"
 import Modal from "react-modal"

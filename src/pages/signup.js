@@ -1,5 +1,4 @@
 import { useState } from "react"
-import Cookies from "js-cookie"
 import axios from "axios"
 import toast, { Toaster } from "react-hot-toast"
 import Head from "next/head"
@@ -9,17 +8,25 @@ import Header from "../components/Base"
 import { Booking } from "../lib/icons/Undraw"
 import sass from "../styles/login.module.sass"
 
-const signin = () => {
+const signup = () => {
 	const [name, setName] = useState("")
+	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
+	const [passwordConfirmation, setPasswordConfirmation] = useState("")
 
 	const handleChange = (e) => {
 		switch (e.target.name) {
 			case "name":
 				setName(e.target.value)
 				break
+			case "email":
+				setEmail(e.target.value)
+				break
 			case "password":
 				setPassword(e.target.value)
+				break
+			case "passwordConfirmation":
+				setPasswordConfirmation(e.target.value)
 				break
 		}
 	}
@@ -32,22 +39,17 @@ const signin = () => {
 			},
 			data: {
 				name: name,
+				email: email,
 				password: password,
+				password_confirmation: passwordConfirmation,
 			},
-			url: "http://paxanddos.ddns.net:8000/api/auth/signin",
+			url: "http://paxanddos.ddns.net:8000/api/auth/register",
 		}
 		const promise = axios.post(api.url, api.data, { headers: api.headers })
 		toast.promise(promise, {
-			loading: "Logging in...",
+			loading: "Signing up..",
 			success: (response) => {
-				Cookies.set("user", {
-					id: response.data.user.id,
-					name: response.data.user.name,
-					email: response.data.user.email,
-					image: response.data.user.image,
-					token: response.data.token,
-				})
-				setTimeout(() => location.replace("/calendars"), 1500)
+				setTimeout(() => location.replace("/signin"), 1500)
 				return response.data.message
 			},
 			error: (error) => {
@@ -59,6 +61,13 @@ const signin = () => {
 							i++
 						)
 							toast.error(error.response.data.errors.name[i])
+					if (error.response.data.errors.email)
+						for (
+							let i = 0;
+							i < error.response.data.errors.email.length;
+							i++
+						)
+							toast.error(error.response.data.errors.password[i])
 					if (error.response.data.errors.password)
 						for (
 							let i = 0;
@@ -75,7 +84,7 @@ const signin = () => {
 	return (
 		<>
 			<Head>
-				<title>Sign in &#8739; Weevely</title>
+				<title>Sign up &#8739; Weevely</title>
 				<meta
 					name='viewport'
 					content='initial-scale=1.0, width=device-width'
@@ -87,7 +96,7 @@ const signin = () => {
 					<div className={sass.fields}>
 						<h1>Welcome to Weevely!</h1>
 						<span>
-							Log in to gain access to all features of the
+							Sign up to gain access to all features of the
 							application, create and manage events and connect to
 							others. See our{" "}
 							<Link href='/privacy-policy'>
@@ -110,6 +119,17 @@ const signin = () => {
 								/>
 							</label>
 							<label>
+								Your email
+								<input
+									type='email'
+									id='email'
+									name='email'
+									value={email}
+									onChange={handleChange}
+									required
+								/>
+							</label>
+							<label>
 								Your password
 								<input
 									type='password'
@@ -120,12 +140,23 @@ const signin = () => {
 									required
 								/>
 							</label>
+							<label>
+								Repeat your password
+								<input
+									type='password'
+									id='passwordConfirmation'
+									name='passwordConfirmation'
+									value={passwordConfirmation}
+									onChange={handleChange}
+									required
+								/>
+							</label>
 							<button type='submit'>Sign in</button>
 						</form>
 						<span>
-							Not a member yet?{" "}
-							<Link href='/signup'>
-								<a>Sign up!</a>
+							Already a member?{" "}
+							<Link href='/signin'>
+								<a>Sign in!</a>
 							</Link>
 						</span>
 					</div>
@@ -163,15 +194,15 @@ const signin = () => {
 	)
 }
 
-export async function getServerSideProps(ctx) {
-	const cookies = ctx.req.headers.cookie
+export async function getServerSideProps(context) {
+	const cookies = context.req.headers.cookie
 
 	// if (cookies.split("=")[0] === "user") {
-	// 	ctx.res.writeHead(303, { Location: "/calendars" })
-	// 	ctx.res.end()
+	// 	context.res.writeHead(303, { Location: "/calendars" })
+	// 	context.res.end()
 	// }
 
 	return { props: {} }
 }
 
-export default signin
+export default signup

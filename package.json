@@ -25,9 +25,7 @@
     "weekend",
     "holiday",
     "nextjs",
-    "reactjs",
-    "nextauth",
-    "prisma"
+    "reactjs"
   ],
   "author": "Paul Litovka",
   "license": "GPL-3.0",
@@ -36,23 +34,20 @@
   },
   "homepage": "https://github.com/PAXANDDOS/weevely-next#readme",
   "dependencies": {
-    "@ipregistry/client": "^4.1.0",
-    "@next-auth/prisma-adapter": "^0.5.4",
-    "@prisma/client": "^3.1.1",
     "axios": "^0.21.4",
     "dayjs": "^1.10.7",
     "holidayapi": "^5.0.0",
+    "js-cookie": "^2.2.1",
     "next": "^11.1.2",
-    "next-auth": "^3.29.0",
+    "nookies": "^2.5.2",
     "nprogress": "^0.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hot-toast": "^2.1.1",
     "react-modal": "^3.14.3",
-    "sass": "^1.42.1",
-    "yup": "^0.32.9"
+    "sass": "^1.42.1"
   },
   "devDependencies": {
-    "babel-plugin-superjson-next": "^0.4.1",
-    "prisma": "^3.1.1"
+    "babel-plugin-superjson-next": "^0.4.1"
   }
 }

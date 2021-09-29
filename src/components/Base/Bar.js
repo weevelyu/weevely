@@ -6,7 +6,7 @@ import { Logo } from "../../lib/icons/Brand"
 import { Calendar, Shared } from "../../lib/icons/Misc"
 import AccountDropdown from "../Dropdowns/AccountDropdown"
 
-const Bar = ({ session }) => {
+const Bar = ({ user }) => {
 	const { pathname } = useRouter()
 	return (
 		<div className={styles.bar}>
@@ -46,7 +46,7 @@ const Bar = ({ session }) => {
 				</Link>
 			</div>
 			<div className={styles.barAccount}>
-				<AccountDropdown session={session} />
+				<AccountDropdown user={user} />
 			</div>
 		</div>
 	)

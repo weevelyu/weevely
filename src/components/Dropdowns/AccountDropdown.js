@@ -1,10 +1,9 @@
 import { useState } from "react"
-import { signOut } from "next-auth/client"
 import Link from "next/link"
 
 import styles from "../../styles/app.module.scss"
 
-const AccountDropdown = ({ session }) => {
+const AccountDropdown = ({ user }) => {
 	const [toggle, setToggle] = useState(false)
 
 	return (
@@ -13,7 +12,7 @@ const AccountDropdown = ({ session }) => {
 				onClick={() => setToggle(!toggle)}
 				className={styles.barAccountButton}
 			>
-				<img src={session.user.image} alt='picture' />
+				<img src={user.image} alt='picture' />
 			</button>
 			{toggle && (
 				<div className={styles.dropdownBarOptions}>
@@ -22,7 +21,7 @@ const AccountDropdown = ({ session }) => {
 							Account
 						</button>
 					</Link>
-					<Link href={`/user/${session.user.name}`}>
+					<Link href={`/user/${user.name}`}>
 						<button className={styles.dropdownBarOption}>
 							Public profile
 						</button>

@@ -1,11 +1,8 @@
 import axios from "axios"
-import { useSession } from "next-auth/client"
 import { Plus } from "../../lib/icons/Misc"
 import styles from "../../styles/app.module.scss"
 
 const NewCalendar = ({ setCalendars }) => {
-	const [session, loading] = useSession()
-
 	const addCalendar = () => {
 		if (!loading) {
 			const api = {
@@ -15,7 +12,7 @@ const NewCalendar = ({ setCalendars }) => {
 					Authorization: session.accessToken,
 				},
 				data: {},
-				url: `http://paxanddos.ddns.net:3000/api/calendars`,
+				url: `http://paxanddos.ddns.net:8000/api/calendars`,
 			}
 			axios
 				.post(api.url, api.data, {

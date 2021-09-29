@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { useSession } from "next-auth/client"
 import axios from "axios"
 
 import CalendarModal from "../Modals/CalendarModal"
