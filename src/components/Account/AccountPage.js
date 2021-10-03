@@ -1,16 +1,22 @@
 import Image from "next/image"
 import { useState } from "react"
+import { parseCookies, destroyCookie, setCookie } from "nookies"
+import toast, { Toaster } from "react-hot-toast"
 import axios from "axios"
 
 import styles from "../../styles/app.module.scss"
 
-export const AccountPage = ({ user, session }) => {
+export const AccountPage = ({ user }) => {
 	const [name, setName] = useState(user.name)
+	const [email, setEmail] = useState(user.email)
 
 	const handleChange = (e) => {
 		switch (e.target.id) {
 			case "name":
 				setName(e.target.value)
+				break
+			case "email":
+				setEmail(e.target.value)
 				break
 			case "image":
 				const formData = new FormData()
@@ -18,6 +24,43 @@ export const AccountPage = ({ user, session }) => {
 					"image",
 					document.querySelector("#image").files[0]
 				)
+
+				const api = {
+					headers: {
+						"Content-Type": "multipart/form-data",
+						Accept: "application/json",
+						Authorization: "Bearer" + user.token,
+					},
+					data: formData,
+					url: "http://paxanddos.ddns.net:8000/api/users/me/avatar",
+				}
+				const promise = axios.post(api.url, api.data, {
+					headers: api.headers,
+				})
+				toast.promise(promise, {
+					loading: "Changing avatar...",
+					success: (response) => {
+						const old_user = JSON.parse(parseCookies().user)
+						const user = {
+							id: old_user.id,
+							name: old_user.name,
+							email: old_user.email,
+							image: response.data.image,
+							token: old_user.token,
+						}
+						destroyCookie(null, "user")
+						setCookie(null, "user", JSON.stringify(user), {
+							maxAge: old_user.expires_in,
+							path: "/",
+						})
+						location.reload()
+						return response.data.message
+					},
+					error: (error) => {
+						console.log(error)
+						return "Error"
+					},
+				})
 				break
 		}
 	}
@@ -27,15 +70,63 @@ export const AccountPage = ({ user, session }) => {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				Authorization: session.accessToken,
+				Authorization: "Bearer " + user.token,
 			},
 			data: {
 				name: name,
+				email: email,
 			},
-			url: `http://paxanddos.ddns.net:3000/api/users/${user.id}`,
+			url: `http://paxanddos.ddns.net:8000/api/users/me`,
 		}
-		axios.patch(api.url, api.data, {
+
+		if (name === user.name) delete api.data.name
+		if (email === user.email) delete api.data.email
+		if (Object.keys(api.data).length === 0) {
+			toast.error("Nothing to update.")
+			return
+		}
+
+		const promise = axios.patch(api.url, api.data, {
 			headers: api.headers,
+		})
+
+		toast.promise(promise, {
+			loading: "Updating you...",
+			success: (response) => {
+				const old_user = JSON.parse(parseCookies().user)
+				const user = {
+					id: response.data.user.id,
+					name: response.data.user.name,
+					email: response.data.user.email,
+					image: response.data.user.image,
+					token: old_user.token,
+				}
+				destroyCookie(null, "user")
+				setCookie(null, "user", JSON.stringify(user), {
+					maxAge: old_user.expires_in,
+					path: "/",
+				})
+				return response.data.message
+			},
+			error: (error) => {
+				if (error.response.data.errors) {
+					if (error.response.data.errors.name)
+						for (
+							let i = 0;
+							i < error.response.data.errors.name.length;
+							i++
+						)
+							toast.error(error.response.data.errors.name[i])
+					if (error.response.data.errors.email)
+						for (
+							let i = 0;
+							i < error.response.data.errors.email.length;
+							i++
+						)
+							toast.error(error.response.data.errors.email[i])
+				}
+				return error.response.data.message
+			},
 		})
 	}
 
@@ -79,6 +170,25 @@ export const AccountPage = ({ user, session }) => {
 				/>
 				<input type='submit' value='Apply' />
 			</form>
+			<Toaster
+				position='bottom-center'
+				reverseOrder={false}
+				toastOptions={{
+					style: {
+						borderRadius: "8px",
+						backgroundColor: "white",
+						padding: "10px",
+					},
+					duration: 2000,
+					success: {
+						iconTheme: {
+							primary: "#7c6aef",
+							secondary: "#FFF",
+						},
+					},
+					error: { duration: 4000 },
+				}}
+			/>
 		</div>
 	)
 }

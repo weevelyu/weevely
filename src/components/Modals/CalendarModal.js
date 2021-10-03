@@ -44,24 +44,21 @@ const style = {
 	},
 }
 
-const CalendarModal = ({ calendar, editing, editRecord, setCalendars }) => {
-	const [session, loading] = useSession()
+const CalendarModal = ({ calendar, editing, editRecord, accessToken }) => {
 	const router = useRouter()
 	const [title, setTitle] = useState(calendar.title)
 
 	const applyChanges = () => {
-		if (loading) return
-
 		const api = {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				Authorization: session.accessToken,
+				Authorization: "Bearer " + accessToken,
 			},
 			data: {
 				title: title,
 			},
-			url: `http://paxanddos.ddns.net:3000/api/calendars/${calendar.id}`,
+			url: `http://paxanddos.ddns.net:8000/api/calendars/${calendar.id}`,
 		}
 		axios
 			.patch(api.url, api.data, {

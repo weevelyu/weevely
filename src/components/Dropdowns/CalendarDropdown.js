@@ -8,17 +8,15 @@ import { Dots } from "../../lib/icons/Misc"
 const CalendarDrowdown = (props) => {
 	const [editing, setEditing] = useState(false)
 	const [toggle, setToggle] = useState(false)
-	const [session, loading] = useSession()
 
 	const deleteRecord = () => {
-		if (loading) return
 		const api = {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				Authorization: session.accessToken,
+				Authorization: "Bearer" + props.accessToken,
 			},
-			url: `http://paxanddos.ddns.net:3000/api/calendars/${props.calendar.id}`,
+			url: `http://paxanddos.ddns.net:8000/api/calendars/${props.calendar.id}`,
 		}
 		axios.delete(api.url, {
 			headers: api.headers,
@@ -62,7 +60,7 @@ const CalendarDrowdown = (props) => {
 						calendar={props.calendar}
 						editing={editing}
 						editRecord={editRecord}
-						setCalendars={props.setCalendars}
+						accessToken={props.accessToken}
 					/>
 				</div>
 			)}

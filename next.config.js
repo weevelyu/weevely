@@ -25,6 +25,7 @@ module.exports = {
 			"lh4.googleusercontent.com",
 			"lh5.googleusercontent.com",
 			"lh6.googleusercontent.com",
+			"d3djy7pad2souj.cloudfront.net",
 		],
 	},
 }

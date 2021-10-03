@@ -1,4 +1,4 @@
-@use 'index.scss' as *;
+@use "index.scss" as *;
 
 .app {
 	@include flex-row;
@@ -250,13 +250,14 @@
 				box-shadow: $shadow-default;
 				.userBannerImageBlock {
 					width: 100%;
-					height: 100px;
+					height: 110px;
 					background: $brand-purple;
 					border-radius: 20px 20px 0 0;
 					.userBannerImage {
 						border-radius: 10px;
 						margin: 40px 0 0 20px;
 						width: 110px;
+						height: 110px;
 					}
 				}
 				.userBannerDataBlock {

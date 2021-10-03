@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Cookies from "js-cookie"
+import nookies, { setCookie } from "nookies"
 import axios from "axios"
 import toast, { Toaster } from "react-hot-toast"
 import Head from "next/head"
@@ -40,14 +40,19 @@ const signin = () => {
 		toast.promise(promise, {
 			loading: "Logging in...",
 			success: (response) => {
-				Cookies.set("user", {
+				const user = {
 					id: response.data.user.id,
 					name: response.data.user.name,
 					email: response.data.user.email,
 					image: response.data.user.image,
 					token: response.data.token,
+					expires_in: response.data.expires_in,
+				}
+				setCookie(null, "user", JSON.stringify(user), {
+					maxAge: user.expires_in,
+					path: "/",
 				})
-				setTimeout(() => location.replace("/calendars"), 1500)
+				location.replace("/calendars")
 				return response.data.message
 			},
 			error: (error) => {
@@ -164,13 +169,11 @@ const signin = () => {
 }
 
 export async function getServerSideProps(ctx) {
-	const cookies = ctx.req.headers.cookie
-
-	// if (cookies.split("=")[0] === "user") {
-	// 	ctx.res.writeHead(303, { Location: "/calendars" })
-	// 	ctx.res.end()
-	// }
-
+	const user = nookies.get(ctx).user
+	if (!!user) {
+		ctx.res.writeHead(303, { Location: "/calendars" })
+		ctx.res.end()
+	}
 	return { props: {} }
 }
 

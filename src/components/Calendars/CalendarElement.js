@@ -6,7 +6,7 @@ import { Lock, Link as LinkSVG, Party, Time } from "../../lib/icons/Misc"
 import CalendarDrowdown from "../Dropdowns/CalendarDropdown"
 import styles from "../../styles/app.module.scss"
 
-const CalendarElement = ({ calendar, setCalendars }) => {
+const CalendarElement = ({ calendar, setCalendars, accessToken }) => {
 	dayjs.extend(relativeTime)
 	return (
 		<div className={styles.calendarElement}>
@@ -16,6 +16,7 @@ const CalendarElement = ({ calendar, setCalendars }) => {
 					<CalendarDrowdown
 						calendar={calendar}
 						setCalendars={setCalendars}
+						accessToken={accessToken}
 					/>
 				</h2>
 				<span className={styles.calendarSpan}>

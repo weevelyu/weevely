@@ -17,8 +17,12 @@ export default function calendars({ user, data }) {
 				<CalendarList
 					calendars={calendars}
 					setCalendars={setCalendars}
+					accessToken={user.token}
 				/>
-				<NewCalendar setCalendars={setCalendars} />
+				<NewCalendar
+					setCalendars={setCalendars}
+					accessToken={user.token}
+				/>
 			</div>
 		</Application>
 	)

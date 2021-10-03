@@ -3,37 +3,24 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 
 import UserStat from "../../components/User/UserStat"
-import UserAccounts from "./UserAccounts"
 import styles from "../../styles/app.module.scss"
 
-const UserBanner = ({ user, owner }) => {
+const UserBanner = ({ owner, isOwner }) => {
 	dayjs.extend(relativeTime)
 
 	return (
 		<div className={styles.userBanner}>
 			<div className={styles.userBannerImageBlock}>
-				<img className={styles.userBannerImage} src={user.image} />
+				<img className={styles.userBannerImage} src={owner.image} />
 			</div>
 			<div className={styles.userBannerDataBlock}>
-				<h2 className={styles.userBannerDataName}>
-					{user.name}
-					<UserAccounts accounts={user.accounts} />
-				</h2>
-				{user.sessions.length !== 0 ? (
-					<span className={styles.userBannerDataStatus} id='online'>
-						Online
-					</span>
-				) : (
-					<span className={styles.userBannerDataStatus} id='offline'>
-						Offline
-					</span>
-				)}
-				<UserStat title='Share ID' content={user.shareId} />
+				<h2 className={styles.userBannerDataName}>{owner.name}</h2>
+				<UserStat title='Share ID' content={owner.shareId} />
 				<UserStat
 					title='Member for'
-					content={dayjs(user.createdAt).fromNow(true)}
+					content={dayjs(owner.created_at).fromNow(true)}
 				/>
-				{owner && (
+				{isOwner && (
 					<Link href='/account'>
 						<a className={styles.userBannerOwnerButton}>
 							Account settings

@@ -1,9 +1,10 @@
 import Head from "next/head"
+import nookies from "nookies"
 
 import Header from "../components/Base"
 import Welcome from "../components/Welcome"
 
-export default function index() {
+const index = () => {
 	return (
 		<>
 			<Head>
@@ -20,3 +21,14 @@ export default function index() {
 		</>
 	)
 }
+
+export async function getServerSideProps(ctx) {
+	const user = nookies.get(ctx).user
+	if (!!user) {
+		ctx.res.writeHead(303, { Location: "/calendars" })
+		ctx.res.end()
+	}
+	return { props: {} }
+}
+
+export default index
