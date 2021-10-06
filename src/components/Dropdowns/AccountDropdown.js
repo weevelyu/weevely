@@ -14,7 +14,7 @@ const AccountDropdown = ({ user }) => {
 				Accept: "application/json",
 				Authorization: user.token,
 			},
-			url: "http://paxanddos.ddns.net:8000/api/auth/signout",
+			url: `${process.env.API_URL}/api/auth/signout`,
 		}
 		axios
 			.post(api.url, null, {

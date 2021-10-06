@@ -14,9 +14,9 @@ const CalendarDrowdown = (props) => {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				Authorization: "Bearer" + props.accessToken,
+				Authorization: props.accessToken,
 			},
-			url: `http://paxanddos.ddns.net:8000/api/calendars/${props.calendar.id}`,
+			url: `${process.env.API_URL}/api/calendars/${props.calendar.id}`,
 		}
 		axios.delete(api.url, {
 			headers: api.headers,

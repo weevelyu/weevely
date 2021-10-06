@@ -4,6 +4,8 @@ import { Arrow } from "../../lib/icons/Misc"
 import styles from "../../styles/app.module.scss"
 
 const EventElement = ({ event }) => {
+	event.target = new Date(event.target)
+	console.log(event)
 	return (
 		<Link href={`/calendars/${event.calendarId}/${event.id}`}>
 			<div className={styles.eventElement}>
@@ -22,11 +24,6 @@ const EventElement = ({ event }) => {
 						<span className={styles.eventElementTitle}>
 							{event.title}
 						</span>
-						{event.duration && (
-							<span className={styles.eventElementDuration}>
-								{event.duration} hours
-							</span>
-						)}
 					</div>
 				</div>
 				<div className={styles.eventElementArrow}>

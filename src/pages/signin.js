@@ -34,7 +34,7 @@ const signin = () => {
 				name: name,
 				password: password,
 			},
-			url: "http://paxanddos.ddns.net:8000/api/auth/signin",
+			url: `${process.env.API_URL}/api/auth/signin`,
 		}
 		const promise = axios.post(api.url, api.data, {
 			headers: api.headers,
@@ -166,6 +166,7 @@ export async function getServerSideProps(ctx) {
 		ctx.res.writeHead(303, { Location: "/calendars" })
 		ctx.res.end()
 	}
+
 	return { props: {} }
 }
 

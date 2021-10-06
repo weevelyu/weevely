@@ -31,7 +31,7 @@ export const AccountPage = ({ user }) => {
 						Authorization: user.token,
 					},
 					data: formData,
-					url: "http://paxanddos.ddns.net:8000/api/users/me/avatar",
+					url: `${process.env.API_URL}/api/users/me/avatar`,
 				}
 				const promise = axios.post(api.url, api.data, {
 					headers: api.headers,
@@ -63,7 +63,7 @@ export const AccountPage = ({ user }) => {
 				name: name,
 				email: email,
 			},
-			url: `http://paxanddos.ddns.net:8000/api/users/me`,
+			url: `${process.env.API_URL}/api/users/me`,
 		}
 
 		if (name === user.name) delete api.data.name

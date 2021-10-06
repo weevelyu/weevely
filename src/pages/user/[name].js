@@ -21,7 +21,7 @@ export async function getServerSideProps(ctx) {
 	try {
 		const user = JSON.parse(nookies.get(ctx).user)
 		const response = await axios.get(
-			`http://paxanddos.ddns.net:8000/api/users/${ctx.params.name}`,
+			`${process.env.API_URL}/api/users/${ctx.params.name}`,
 			{
 				headers: {
 					Accept: "application/json",

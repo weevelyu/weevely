@@ -44,7 +44,7 @@ const signup = () => {
 				password: password,
 				password_confirmation: passwordConfirmation,
 			},
-			url: "http://paxanddos.ddns.net:8000/api/auth/register",
+			url: `${process.env.API_URL}/api/auth/register`,
 		}
 		const promise = axios.post(api.url, api.data, {
 			headers: api.headers,

@@ -20,7 +20,7 @@ export async function getServerSideProps(ctx) {
 	//try {
 	const user = JSON.parse(nookies.get(ctx).user)
 	const response = await axios.get(
-		`http://paxanddos.ddns.net:8000/api/calendars/${ctx.params.id}`,
+		`${process.env.API_URL}/api/calendars/${ctx.params.id}`,
 		{
 			headers: {
 				Accept: "application/json",
@@ -35,9 +35,7 @@ export async function getServerSideProps(ctx) {
 
 	if (response.data.main && response.data.events.length === 0) {
 		const key = process.env.HOLIDAY_API_KEY
-		const ipres = await axios.get(
-			`http://paxanddos.ddns.net:8000/api/checkip`
-		)
+		const ipres = await axios.get(`https://checkip.amazonaws.com/`)
 		const countryres = await axios.get(
 			`http://ip-api.com/json/${ipres.data}`
 		)
@@ -48,16 +46,21 @@ export async function getServerSideProps(ctx) {
 			country: country,
 			year: year - 1,
 		})
-		const holidayres = await axios.post(
-			"http://paxanddos.ddns.net:8000/api/calendars/signin",
-			holidays.holidays,
-			{
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-			}
-		)
+		const api = {
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				Authorization: user.token,
+			},
+			data: {
+				holidays: holidays.holidays,
+			},
+			url: `${process.env.API_URL}/api/calendars/${ctx.params.id}/holidays`,
+		}
+		const holidayres = await axios.post(api.url, api.data, {
+			headers: api.headers,
+		})
+		console.log(holidayres)
 	}
 
 	return {
