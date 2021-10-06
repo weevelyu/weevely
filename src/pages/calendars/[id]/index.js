@@ -34,18 +34,8 @@ export async function getServerSideProps(ctx) {
 	// }
 
 	if (response.data.main && response.data.events.length === 0) {
-		const key = process.env.HOLIDAY_API_KEY
-		const ipres = await axios.get(`https://checkip.amazonaws.com/`)
-		const countryres = await axios.get(
-			`http://ip-api.com/json/${ipres.data}`
-		)
-		const holidayApi = new HolidayAPI({ key })
-		const country = countryres.data.countryCode
-		const year = new Date().getFullYear()
-		const holidays = await holidayApi.holidays({
-			country: country,
-			year: year - 1,
-		})
+		const ip = await axios.get(`https://checkip.amazonaws.com/`).data
+		const location = await axios.get(`http://ip-api.com/json/${ip}`).data
 		const api = {
 			headers: {
 				"Content-Type": "application/json",
@@ -53,14 +43,15 @@ export async function getServerSideProps(ctx) {
 				Authorization: user.token,
 			},
 			data: {
-				holidays: holidays.holidays,
+				country: location.countryCode,
+				year: new Date().getFullYear() - 1,
 			},
 			url: `${process.env.API_URL}/api/calendars/${ctx.params.id}/holidays`,
 		}
-		const holidayres = await axios.post(api.url, api.data, {
+		const res = await axios.post(api.url, api.data, {
 			headers: api.headers,
 		})
-		console.log(holidayres)
+		console.log(res)
 	}
 
 	return {
