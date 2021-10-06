@@ -8,7 +8,7 @@ const NewCalendar = ({ setCalendars, accessToken }) => {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				Authorization: "Bearer " + accessToken,
+				Authorization: accessToken,
 			},
 			data: {},
 			url: `http://paxanddos.ddns.net:8000/api/calendars/my`,

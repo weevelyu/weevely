@@ -36,7 +36,7 @@ export async function getServerSideProps(ctx) {
 			{
 				headers: {
 					Accept: "application/json",
-					Authorization: "Bearer " + user.token,
+					Authorization: user.token,
 				},
 			}
 		)

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import nookies, { setCookie } from "nookies"
+import nookies from "nookies"
 import axios from "axios"
 import toast, { Toaster } from "react-hot-toast"
 import Head from "next/head"
@@ -36,22 +36,14 @@ const signin = () => {
 			},
 			url: "http://paxanddos.ddns.net:8000/api/auth/signin",
 		}
-		const promise = axios.post(api.url, api.data, { headers: api.headers })
+		const promise = axios.post(api.url, api.data, {
+			headers: api.headers,
+			withCredentials: true,
+		})
 		toast.promise(promise, {
 			loading: "Logging in...",
 			success: (response) => {
-				const user = {
-					id: response.data.user.id,
-					name: response.data.user.name,
-					email: response.data.user.email,
-					image: response.data.user.image,
-					token: response.data.token,
-					expires_in: response.data.expires_in,
-				}
-				setCookie(null, "user", JSON.stringify(user), {
-					maxAge: user.expires_in,
-					path: "/",
-				})
+				console.log(response)
 				location.replace("/calendars")
 				return response.data.message
 			},

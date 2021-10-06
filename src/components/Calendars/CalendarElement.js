@@ -36,7 +36,7 @@ const CalendarElement = ({ calendar, setCalendars, accessToken }) => {
 				)}
 				<span className={styles.calendarSpan}>
 					<Time />
-					Created {dayjs(calendar.createdAt).fromNow()}
+					Created {dayjs(calendar.created_at).fromNow()}
 				</span>
 			</div>
 			<Link href={`/calendars/${calendar.id}`}>

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
+import nookies from "nookies"
 import toast, { Toaster } from "react-hot-toast"
 import Head from "next/head"
 import Link from "next/link"
@@ -45,11 +46,14 @@ const signup = () => {
 			},
 			url: "http://paxanddos.ddns.net:8000/api/auth/register",
 		}
-		const promise = axios.post(api.url, api.data, { headers: api.headers })
+		const promise = axios.post(api.url, api.data, {
+			headers: api.headers,
+			withCredentials: true,
+		})
 		toast.promise(promise, {
 			loading: "Signing up..",
 			success: (response) => {
-				setTimeout(() => location.replace("/signin"), 1500)
+				location.replace("/calendars")
 				return response.data.message
 			},
 			error: (error) => {
@@ -194,14 +198,12 @@ const signup = () => {
 	)
 }
 
-export async function getServerSideProps(context) {
-	const cookies = context.req.headers.cookie
-
-	// if (cookies.split("=")[0] === "user") {
-	// 	context.res.writeHead(303, { Location: "/calendars" })
-	// 	context.res.end()
-	// }
-
+export async function getServerSideProps(ctx) {
+	const user = nookies.get(ctx).user
+	if (!!user) {
+		ctx.res.writeHead(303, { Location: "/calendars" })
+		ctx.res.end()
+	}
 	return { props: {} }
 }
 

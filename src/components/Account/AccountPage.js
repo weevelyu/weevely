@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { useState } from "react"
-import { parseCookies, destroyCookie, setCookie } from "nookies"
 import toast, { Toaster } from "react-hot-toast"
 import axios from "axios"
 
@@ -29,30 +28,18 @@ export const AccountPage = ({ user }) => {
 					headers: {
 						"Content-Type": "multipart/form-data",
 						Accept: "application/json",
-						Authorization: "Bearer" + user.token,
+						Authorization: user.token,
 					},
 					data: formData,
 					url: "http://paxanddos.ddns.net:8000/api/users/me/avatar",
 				}
 				const promise = axios.post(api.url, api.data, {
 					headers: api.headers,
+					withCredentials: true,
 				})
 				toast.promise(promise, {
 					loading: "Changing avatar...",
 					success: (response) => {
-						const old_user = JSON.parse(parseCookies().user)
-						const user = {
-							id: old_user.id,
-							name: old_user.name,
-							email: old_user.email,
-							image: response.data.image,
-							token: old_user.token,
-						}
-						destroyCookie(null, "user")
-						setCookie(null, "user", JSON.stringify(user), {
-							maxAge: old_user.expires_in,
-							path: "/",
-						})
 						location.reload()
 						return response.data.message
 					},
@@ -70,7 +57,7 @@ export const AccountPage = ({ user }) => {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				Authorization: "Bearer " + user.token,
+				Authorization: user.token,
 			},
 			data: {
 				name: name,
@@ -88,27 +75,14 @@ export const AccountPage = ({ user }) => {
 
 		const promise = axios.patch(api.url, api.data, {
 			headers: api.headers,
+			withCredentials: true,
 		})
 
 		toast.promise(promise, {
 			loading: "Updating you...",
-			success: (response) => {
-				const old_user = JSON.parse(parseCookies().user)
-				const user = {
-					id: response.data.user.id,
-					name: response.data.user.name,
-					email: response.data.user.email,
-					image: response.data.user.image,
-					token: old_user.token,
-				}
-				destroyCookie(null, "user")
-				setCookie(null, "user", JSON.stringify(user), {
-					maxAge: old_user.expires_in,
-					path: "/",
-				})
-				return response.data.message
-			},
+			success: (response) => response.data.message,
 			error: (error) => {
+				console.log(error)
 				if (error.response.data.errors) {
 					if (error.response.data.errors.name)
 						for (

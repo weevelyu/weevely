@@ -1,16 +1,13 @@
-import { getSession } from "next-auth/client"
 import { HolidayAPI } from "holidayapi"
-import { IpregistryClient } from "@ipregistry/client"
-
-import prisma from "../../../../prisma"
+import nookies from "nookies"
+import axios from "axios"
 import styles from "../../../styles/app.module.scss"
 import Application from "../../../components/Layout"
 import BigCalendar from "../../../components/Calendars/BigCalendar"
 
-const calendar = ({ session, calendar }) => {
-	console.log(calendar)
+const calendar = ({ user, calendar }) => {
 	return (
-		<Application session={session} title={calendar.title}>
+		<Application user={user} title={calendar.title}>
 			<h1 className={styles.pageTitle}>{calendar.title}</h1>
 			<div className={styles.calendarPage}>
 				<BigCalendar calendar={calendar} />
@@ -19,55 +16,53 @@ const calendar = ({ session, calendar }) => {
 	)
 }
 
-export async function getServerSideProps({ req, res, params }) {
-	const session = await getSession({ req })
-	if (!session) {
-		res.writeHead(302, { Location: "/signin" }).end()
-		return {}
-	}
-	const calendar = await prisma.calendar.findUnique({
-		where: {
-			id: +params.id,
-		},
-		include: {
-			events: true,
-		},
-	})
+export async function getServerSideProps(ctx) {
+	//try {
+	const user = JSON.parse(nookies.get(ctx).user)
+	const response = await axios.get(
+		`http://paxanddos.ddns.net:8000/api/calendars/${ctx.params.id}`,
+		{
+			headers: {
+				Accept: "application/json",
+				Authorization: user.token,
+			},
+		}
+	)
+	// } catch (e) {
+	// 	ctx.res.writeHead(303, { Location: "/signin" })
+	// 	ctx.res.end()
+	// }
 
-	if (calendar.main && calendar.events.length === 0) {
-		const ip = req.headers["x-real-ip"] || req.connection.remoteAddress
-
+	if (response.data.main && response.data.events.length === 0) {
 		const key = process.env.HOLIDAY_API_KEY
+		const ipres = await axios.get(
+			`http://paxanddos.ddns.net:8000/api/checkip`
+		)
+		const countryres = await axios.get(
+			`http://ip-api.com/json/${ipres.data}`
+		)
 		const holidayApi = new HolidayAPI({ key })
-		const ipRegistry = new IpregistryClient(process.env.IPREGISTRY_API_KEY)
-
-		const response = await ipRegistry.lookup(ip)
-		const country = response.data.location.country.code
+		const country = countryres.data.countryCode
 		const year = new Date().getFullYear()
-
 		const holidays = await holidayApi.holidays({
 			country: country,
 			year: year - 1,
 		})
-
-		for (const holiday of holidays.holidays) {
-			const date = new Date(holiday.date)
-			date.setFullYear(date.getFullYear() + 1)
-			await prisma.event.create({
-				data: {
-					calendarId: calendar.id,
-					title: holiday.name,
-					content: holiday.name,
-					category: "Arrangement",
-					target: date,
-					duration: 24,
-					system: true,
+		const holidayres = await axios.post(
+			"http://paxanddos.ddns.net:8000/api/calendars/signin",
+			holidays.holidays,
+			{
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
 				},
-			})
-		}
+			}
+		)
 	}
 
-	return { props: { session: session, calendar: calendar } }
+	return {
+		props: { user: user, calendar: response.data },
+	}
 }
 
 export default calendar

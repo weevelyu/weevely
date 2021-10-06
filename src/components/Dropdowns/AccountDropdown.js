@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { destroyCookie } from "nookies"
 import Link from "next/link"
 import axios from "axios"
 
@@ -13,15 +12,19 @@ const AccountDropdown = ({ user }) => {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				Authorization: "Bearer" + user.token,
+				Authorization: user.token,
 			},
 			url: "http://paxanddos.ddns.net:8000/api/auth/signout",
 		}
-		axios.post(api.url, null, { headers: api.headers }).then(() => {
-			destroyCookie(null, "user")
-			location.href = "/"
-			return "Goodbye!"
-		})
+		axios
+			.post(api.url, null, {
+				headers: api.headers,
+				withCredentials: true,
+			})
+			.then(() => {
+				location.href = "/"
+				return "Goodbye!"
+			})
 	}
 
 	return (
