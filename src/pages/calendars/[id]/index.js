@@ -1,4 +1,3 @@
-import { HolidayAPI } from "holidayapi"
 import nookies from "nookies"
 import axios from "axios"
 import styles from "../../../styles/app.module.scss"
@@ -17,45 +16,44 @@ const calendar = ({ user, calendar }) => {
 }
 
 export async function getServerSideProps(ctx) {
-	//try {
-	const user = JSON.parse(nookies.get(ctx).user)
-	const response = await axios.get(
-		`${process.env.API_URL}/api/calendars/${ctx.params.id}`,
-		{
-			headers: {
-				Accept: "application/json",
-				Authorization: user.token,
-			},
-		}
-	)
-	// } catch (e) {
-	// 	ctx.res.writeHead(303, { Location: "/signin" })
-	// 	ctx.res.end()
-	// }
+	try {
+		const user = JSON.parse(nookies.get(ctx).user)
+		const response = await axios.get(
+			`${process.env.API_URL}/api/calendars/${ctx.params.id}`,
+			{
+				headers: {
+					Accept: "application/json",
+					Authorization: user.token,
+				},
+			}
+		)
 
-	if (response.data.main && response.data.events.length === 0) {
-		const ip = await axios.get(`https://checkip.amazonaws.com/`).data
-		const location = await axios.get(`http://ip-api.com/json/${ip}`).data
-		const api = {
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-				Authorization: user.token,
-			},
-			data: {
-				country: location.countryCode,
-				year: new Date().getFullYear() - 1,
-			},
-			url: `${process.env.API_URL}/api/calendars/${ctx.params.id}/holidays`,
+		if (response.data.main && response.data.events.length === 0) {
+			const ip = await axios.get(`https://checkip.amazonaws.com/`)
+			const location = await axios.get(
+				`http://ip-api.com/json/${ip.data}`
+			)
+			const api = {
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+					Authorization: user.token,
+				},
+				data: {
+					country: location.data.countryCode,
+					year: new Date().getFullYear() - 1,
+				},
+				url: `${process.env.API_URL}/api/calendars/${ctx.params.id}/holidays`,
+			}
+			await axios.post(api.url, api.data, { headers: api.headers })
 		}
-		const res = await axios.post(api.url, api.data, {
-			headers: api.headers,
-		})
-		console.log(res)
-	}
 
-	return {
-		props: { user: user, calendar: response.data },
+		return {
+			props: { user: user, calendar: response.data },
+		}
+	} catch (e) {
+		ctx.res.writeHead(303, { Location: "/signin" })
+		ctx.res.end()
 	}
 }
 

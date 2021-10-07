@@ -53,7 +53,7 @@ const CalendarModal = ({ calendar, editing, editRecord, accessToken }) => {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				Authorization: "Bearer " + accessToken,
+				Authorization: accessToken,
 			},
 			data: {
 				title: title,

@@ -34,7 +34,7 @@ const BigCalendar = ({ calendar }) => {
 			<EventList
 				events={calendar.events}
 				selectedDay={selectedDay}
-				month={month}
+				month={month - 1}
 				year={year}
 			/>
 		</>

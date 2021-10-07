@@ -5,7 +5,6 @@ import styles from "../../styles/app.module.scss"
 
 const EventElement = ({ event }) => {
 	event.target = new Date(event.target)
-	console.log(event)
 	return (
 		<Link href={`/calendars/${event.calendarId}/${event.id}`}>
 			<div className={styles.eventElement}>
