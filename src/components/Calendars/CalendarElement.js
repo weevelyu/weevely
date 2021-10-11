@@ -8,6 +8,12 @@ import styles from "../../styles/app.module.scss"
 
 const CalendarElement = ({ calendar, setCalendars, accessToken }) => {
 	dayjs.extend(relativeTime)
+	let upcoming = 0
+	let holiday = 0
+	for (let i = 0; i < calendar.events.length; i++)
+		if (!calendar.events[i].system) upcoming++
+		else holiday++
+
 	return (
 		<div className={styles.calendarElement}>
 			<div className={styles.calendarData}>
@@ -21,12 +27,18 @@ const CalendarElement = ({ calendar, setCalendars, accessToken }) => {
 				</h2>
 				<span className={styles.calendarSpan}>
 					<Party />
-					{calendar.events.length} upcoming events
+					{upcoming} events
 				</span>
+				{calendar.main && (
+					<span className={styles.calendarSpan}>
+						<Party />
+						{holiday} holidays
+					</span>
+				)}
 				{calendar.shared ? (
 					<span className={styles.calendarSpan}>
 						<LinkSVG />
-						Public
+						Shared
 					</span>
 				) : (
 					<span className={styles.calendarSpan}>

@@ -43,7 +43,6 @@ const signin = () => {
 		toast.promise(promise, {
 			loading: "Logging in...",
 			success: (response) => {
-				console.log(response)
 				location.replace("/calendars")
 				return response.data.message
 			},

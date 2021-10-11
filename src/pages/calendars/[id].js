@@ -1,15 +1,15 @@
 import nookies from "nookies"
 import axios from "axios"
-import styles from "../../../styles/app.module.scss"
-import Application from "../../../components/Layout"
-import BigCalendar from "../../../components/Calendars/BigCalendar"
+import styles from "../../styles/app.module.scss"
+import Application from "../../components/Layout"
+import BigCalendar from "../../components/Calendars/BigCalendar"
 
 const calendar = ({ user, calendar }) => {
 	return (
 		<Application user={user} title={calendar.title}>
 			<h1 className={styles.pageTitle}>{calendar.title}</h1>
 			<div className={styles.calendarPage}>
-				<BigCalendar calendar={calendar} />
+				<BigCalendar calendar={calendar} accessToken={user.token} />
 			</div>
 		</Application>
 	)

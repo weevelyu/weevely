@@ -70,9 +70,7 @@ const CalendarModal = ({ calendar, editing, editRecord, accessToken }) => {
 			})
 	}
 
-	const handleChange = (target) => {
-		setTitle(target.value)
-	}
+	const handleChange = (target) => setTitle(target.value)
 
 	return (
 		<Modal

@@ -1,35 +1,45 @@
-import Link from "next/link"
-
+import { useState } from "react"
+import EventModal from "../Modals/EventModal"
 import { Arrow } from "../../lib/icons/Misc"
 import styles from "../../styles/app.module.scss"
 
-const EventElement = ({ event }) => {
-	event.target = new Date(event.target)
+const EventElement = ({ event, accessToken, setEvents }) => {
+	const [eventState, setEventState] = useState(event)
+	const [modal, setModal] = useState(false)
+
 	return (
-		<Link href={`/calendars/${event.calendarId}/${event.id}`}>
-			<div className={styles.eventElement}>
-				<div className={styles.eventElementWrapper}>
-					<span className={styles.eventElementTarget}>
-						{(event.target.getHours() < 10 ? "0" : "") +
-							event.target.getHours()}
-						:
-						{(event.target.getMinutes() < 10 ? "0" : "") +
-							event.target.getMinutes()}
+		<div className={styles.eventElement} onClick={() => setModal(true)}>
+			<div className={styles.eventElementWrapper}>
+				<span className={styles.eventElementTarget}>
+					{(eventState.target.getHours() < 10 ? "0" : "") +
+						eventState.target.getHours()}
+					:
+					{(eventState.target.getMinutes() < 10 ? "0" : "") +
+						eventState.target.getMinutes()}
+				</span>
+				<div className={styles.eventElementData}>
+					<span className={styles.eventElementCategory}>
+						{eventState.category}
 					</span>
-					<div className={styles.eventElementData}>
-						<span className={styles.eventElementCategory}>
-							{event.category}
-						</span>
-						<span className={styles.eventElementTitle}>
-							{event.title}
-						</span>
-					</div>
-				</div>
-				<div className={styles.eventElementArrow}>
-					<Arrow />
+					<span className={styles.eventElementTitle}>
+						{eventState.title}
+					</span>
 				</div>
 			</div>
-		</Link>
+			<div className={styles.eventElementArrow}>
+				<Arrow />
+			</div>
+			{modal && (
+				<EventModal
+					event={eventState}
+					setEventState={setEventState}
+					modal={modal}
+					setModal={setModal}
+					accessToken={accessToken}
+					setEvents={setEvents}
+				/>
+			)}
+		</div>
 	)
 }
 

@@ -9,7 +9,6 @@ import axios from "axios"
 
 export default function calendars({ user, data }) {
 	const [calendars, setCalendars] = useState(data)
-	console.log(user, calendars)
 	return (
 		<Application user={user} title='Your calendars'>
 			<h1 className={styles.pageTitle}>Your calendars</h1>

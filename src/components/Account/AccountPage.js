@@ -43,10 +43,7 @@ export const AccountPage = ({ user }) => {
 						location.reload()
 						return response.data.message
 					},
-					error: (error) => {
-						console.log(error)
-						return "Error"
-					},
+					error: (error) => error,
 				})
 				break
 		}
@@ -82,7 +79,6 @@ export const AccountPage = ({ user }) => {
 			loading: "Updating you...",
 			success: (response) => response.data.message,
 			error: (error) => {
-				console.log(error)
 				if (error.response.data.errors) {
 					if (error.response.data.errors.name)
 						for (

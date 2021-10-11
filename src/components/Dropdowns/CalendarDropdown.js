@@ -2,11 +2,13 @@ import { useState } from "react"
 import axios from "axios"
 
 import CalendarModal from "../Modals/CalendarModal"
+import SharingModal from "../Modals/SharingModal"
 import styles from "../../styles/app.module.scss"
 import { Dots } from "../../lib/icons/Misc"
 
 const CalendarDrowdown = (props) => {
 	const [editing, setEditing] = useState(false)
+	const [sharing, setSharing] = useState(false)
 	const [toggle, setToggle] = useState(false)
 
 	const deleteRecord = () => {
@@ -31,6 +33,11 @@ const CalendarDrowdown = (props) => {
 		fin && setToggle(!toggle)
 	}
 
+	const sharedMenu = (fin) => {
+		setSharing(!sharing)
+		fin && setToggle(!toggle)
+	}
+
 	return (
 		<>
 			<button
@@ -50,6 +57,14 @@ const CalendarDrowdown = (props) => {
 					{props.calendar.main || (
 						<button
 							className={styles.dropdownOption}
+							onClick={() => sharedMenu()}
+						>
+							Share
+						</button>
+					)}
+					{props.calendar.main || (
+						<button
+							className={styles.dropdownOption}
 							onClick={() => deleteRecord()}
 							name='danger'
 						>
@@ -60,6 +75,12 @@ const CalendarDrowdown = (props) => {
 						calendar={props.calendar}
 						editing={editing}
 						editRecord={editRecord}
+						accessToken={props.accessToken}
+					/>
+					<SharingModal
+						calendar={props.calendar}
+						sharing={sharing}
+						sharedMenu={sharedMenu}
 						accessToken={props.accessToken}
 					/>
 				</div>

@@ -2,7 +2,7 @@ $brand-purple: #6775ee;
 $brand-accent-1: #b8bef3;
 $brand-accent-2: #ccd1f5;
 $brand-accent-3: #e0e3f6;
-$brand-white: rgb(250,249,250);
+$brand-white: rgb(250, 249, 250);
 $white-gray: #727272;
 $black-07: rgba(0, 0, 0, 0.7);
 $black-04: rgba(0, 0, 0, 0.4);
@@ -16,7 +16,7 @@ $shadow-darken: 0px 0px 20px rgba(0, 0, 0, 0.25);
 $transition-default: 0.1s cubic-bezier(1, 0.3, 0.51, 0.6);
 
 @mixin unselectable {
-    user-select: none;
+	user-select: none;
 	-moz-user-select: none;
 	-webkit-user-drag: none;
 	-webkit-user-select: none;
@@ -24,46 +24,46 @@ $transition-default: 0.1s cubic-bezier(1, 0.3, 0.51, 0.6);
 }
 
 @mixin flex-column {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 @mixin flex-row {
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 @mixin font-proxima {
-    font-family: "Proxima Nova", Roboto, Arial, Helvetica, sans-serif;
-    font-style: normal;
+	font-family: "Proxima Nova", Roboto, Arial, Helvetica, sans-serif;
+	font-style: normal;
 }
 
 @mixin font-proximasoft {
-    font-family: "Proxima Soft", Roboto, Arial, Helvetica, sans-serif;
-    font-style: normal;
+	font-family: "Proxima Soft", Roboto, Arial, Helvetica, sans-serif;
+	font-style: normal;
 }
 
 @mixin font-highlight {
-    font-family: "Highlight", Roboto, Arial, Helvetica, sans-serif;
-    font-style: normal;
+	font-family: "Highlight", Roboto, Arial, Helvetica, sans-serif;
+	font-style: normal;
 }
 
 @mixin flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 @mixin grid-center {
-    display: grid;
-    place-items: center;
+	display: grid;
+	place-items: center;
 }
 
 @mixin transition($duration: 0) {
-    @if $duration != 0 {
-        transition: $duration cubic-bezier(1, 0.3, 0.51, 0.6);
-    } @else {
-        transition: $transition-default;
-    }
-    transition-property: background, border, fill, transform, box-shadow;
+	@if $duration != 0 {
+		transition: $duration cubic-bezier(1, 0.3, 0.51, 0.6);
+	} @else {
+		transition: $transition-default;
+	}
+	transition-property: background, border, fill, transform, box-shadow, stroke;
 }

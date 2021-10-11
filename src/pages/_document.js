@@ -6,10 +6,7 @@ export default class MyDocument extends Document {
 			<Html lang='en'>
 				<Head>
 					<meta charSet='UTF-8' />
-					<meta
-						httpEquiv='content-type'
-						content='text/html; charset=UTF-8'
-					/>
+					<meta httpEquiv='content-type' content='text/html' />
 					<meta
 						name='description'
 						content='Simple event calendar for creating, managing, and searching events.'

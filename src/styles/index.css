@@ -12,8 +12,7 @@
 }
 
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas,
-		monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, monospace;
 }
 
 button {
@@ -41,11 +40,11 @@ textarea:enabled {
 }
 
 img {
-	user-select: none;
 	-moz-user-select: none;
 	-webkit-user-drag: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
+	user-select: none;
 }
 
 a {
@@ -54,7 +53,7 @@ a {
 }
 
 body {
-	background-color: rgb(250,249,250);
+	background-color: rgb(250, 249, 250);
 	overflow-x: hidden;
 	overflow-y: scroll;
 	scroll-behavior: smooth;
@@ -64,14 +63,14 @@ body {
 }
 ::selection {
 	background: #6775ee;
-	color: rgb(250,249,250);
+	color: rgb(250, 249, 250);
 }
 
 h1,
 h2,
 h3,
 h4 {
-	color: #252525;;
+	color: #252525;
 }
 
 p {

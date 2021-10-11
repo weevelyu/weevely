@@ -5,7 +5,7 @@ import EventList from "../Events/EventList"
 import DateSwitcher from "./DateSwitcher"
 import DateList from "./DateList"
 
-const BigCalendar = ({ calendar }) => {
+const BigCalendar = ({ calendar, accessToken }) => {
 	const dt = new Date()
 	const [month, setMonth] = useState(dt.getMonth() + 1)
 	const [year, setYear] = useState(dt.getFullYear())
@@ -28,14 +28,18 @@ const BigCalendar = ({ calendar }) => {
 				<DateList
 					days={days}
 					events={calendar.events}
+					month={month - 1}
+					year={year}
+					selectedDay={selectedDay}
 					setSelectedDay={setSelectedDay}
 				/>
 			</div>
 			<EventList
-				events={calendar.events}
+				calendar={calendar}
 				selectedDay={selectedDay}
 				month={month - 1}
 				year={year}
+				accessToken={accessToken}
 			/>
 		</>
 	)
