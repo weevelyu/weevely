@@ -28,7 +28,7 @@
 }
 @font-face {
 	font-family: "Proxima Soft";
-	src: url("ProximaSoft-Semibold.woff2") format("woff2");
+	src: url("ProximaSoft-SemiBold.woff2") format("woff2");
 	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
@@ -42,7 +42,7 @@
 }
 @font-face {
 	font-family: "Proxima Soft";
-	src: url("ProximaSoft-Extrabold.woff2") format("woff2");
+	src: url("ProximaSoft-ExtraBold.woff2") format("woff2");
 	font-weight: 800;
 	font-style: normal;
 	font-display: swap;
