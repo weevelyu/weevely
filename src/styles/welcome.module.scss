@@ -91,18 +91,22 @@
 		align-items: center;
 		.footerLeft {
 			svg {
-				width: 20px;
-				fill: $black-04;
-				margin-left: 10px;
+				width: 40px;
+				fill: none;
+				margin: 0 10px 0 0;
+				cursor: default;
+			}
+			a {
+				@include flex-center;
+				height: 100%;
 				cursor: pointer;
-				&:first-child {
-					width: 40px;
-					fill: none;
-					margin: 0 10px 0 0;
-					cursor: default;
-				}
+				margin-left: 4px;
 				&:nth-child(3) {
-					margin-left: 50px;
+					margin-left: 20px;
+				}
+				svg {
+					width: 20px;
+					fill: $black-04;
 				}
 			}
 			height: 100%;

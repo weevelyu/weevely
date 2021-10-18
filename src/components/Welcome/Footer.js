@@ -1,6 +1,5 @@
-import Link from "next/link"
 import { Logo } from "../../lib/icons/Brand"
-import { Email, Facebook, GitHub, Telegram } from "../../lib/icons/Social"
+import { Facebook, GitHub, Telegram } from "../../lib/icons/Social"
 import style from "../../styles/welcome.module.scss"
 
 const Footer = () => {
@@ -9,23 +8,21 @@ const Footer = () => {
 			<div className={style.footerLeft}>
 				<Logo />
 				<span>Weevely</span>
-				<Link href='https://github.com/PAXANDDOS/weevely-next'>
+				<a href='https://github.com/PAXANDDOS/weevely-next'>
 					<GitHub />
-				</Link>
-				<Link href='https://t.me/PAXANDDOS'>
+				</a>
+				<a href='https://t.me/PAXANDDOS'>
 					<Telegram />
-				</Link>
-				<Link href='https://www.facebook.com/paxanddos/'>
+				</a>
+				<a href='https://www.facebook.com/paxanddos/'>
 					<Facebook />
-				</Link>
+				</a>
 			</div>
 			<div className={style.footerRight}>
 				<span>
 					Copyright © 2021{" "}
-					<Link href='https://paxanddos.github.io/'>
-						Paul Litovka
-					</Link>
-					. All rights reserved.
+					<a href='https://paxanddos.github.io/'>Paul Litovka</a>. All
+					rights reserved.
 				</span>
 			</div>
 		</div>

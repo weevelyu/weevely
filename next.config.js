@@ -15,7 +15,6 @@ module.exports = {
 	eslint: {
 		ignoreDuringBuilds: false,
 	},
-	assetPrefix: mode ? "http://cdn.paxanddos.ddns.net" : "",
 	images: {
 		domains: ["d3djy7pad2souj.cloudfront.net"],
 	},
