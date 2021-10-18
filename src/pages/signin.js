@@ -9,7 +9,7 @@ import Header from "../components/Base"
 import { Booking } from "../lib/icons/Undraw"
 import sass from "../styles/login.module.sass"
 
-const signin = () => {
+const Signin = () => {
 	const [name, setName] = useState("")
 	const [password, setPassword] = useState("")
 
@@ -118,7 +118,7 @@ const signin = () => {
 						<span>
 							Forgot your password?{" "}
 							<Link href='/reset-password'>
-								<a>Let's get it back!</a>
+								<a>Let&apos;s get it back!</a>
 							</Link>
 						</span>
 						<span>
@@ -130,7 +130,7 @@ const signin = () => {
 					</div>
 					<div className={sass.info}>
 						<Booking />
-						<h4>We've missed you!</h4>
+						<h4>We&apos;ve missed you!</h4>
 						<span>
 							Create as many calendars as you want, share them
 							with your friends, coworkers or employees! Various
@@ -172,4 +172,4 @@ export async function getServerSideProps(ctx) {
 	return { props: {} }
 }
 
-export default signin
+export default Signin

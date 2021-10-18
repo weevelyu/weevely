@@ -46,6 +46,8 @@
     "sass": "^1.43.2"
   },
   "devDependencies": {
-    "babel-plugin-superjson-next": "^0.4.1"
+    "babel-plugin-superjson-next": "^0.4.1",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^11.1.2"
   }
 }

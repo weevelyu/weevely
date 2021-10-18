@@ -78,7 +78,7 @@ const EventModal = ({
 				onSubmit={(e) => onSubmit(e.preventDefault())}
 			>
 				<span className={styles.sharedModalFormHint}>
-					Enter user's name or ShareID
+					Enter user&apos;s name or ShareID
 				</span>
 				<div className={styles.sharedModalFormUser}>
 					<input

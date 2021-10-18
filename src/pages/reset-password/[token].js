@@ -1,6 +1,5 @@
 import axios from "axios"
 import Head from "next/head"
-import Link from "next/link"
 import nookies from "nookies"
 import { useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
@@ -8,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast"
 import Header from "../../components/Base"
 import sass from "../../styles/login.module.sass"
 
-const resetPasswordToken = ({ token }) => {
+const ResetPasswordToken = ({ token }) => {
 	const [password, setPassword] = useState("")
 	const [passwordConfirm, setPasswordConfirm] = useState("")
 
@@ -61,7 +60,7 @@ const resetPasswordToken = ({ token }) => {
 				<Header />
 				<div className={sass.login}>
 					<div className={sass.fields}>
-						<h1>We'll get your password back!</h1>
+						<h1>We&apos;ll get your password back!</h1>
 						<span></span>
 						<form
 							onSubmit={(e) => handleSubmit(e.preventDefault())}
@@ -92,12 +91,6 @@ const resetPasswordToken = ({ token }) => {
 							</label>
 							<button type='submit'>Change password</button>
 						</form>
-						<span>
-							Everything's fine?{" "}
-							<Link href='/signin'>
-								<a>Go back.</a>
-							</Link>
-						</span>
 					</div>
 				</div>
 			</div>
@@ -134,4 +127,4 @@ export async function getServerSideProps(ctx) {
 	return { props: { token: ctx.params.token } }
 }
 
-export default resetPasswordToken
+export default ResetPasswordToken

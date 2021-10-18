@@ -7,7 +7,7 @@ import NewCalendar from "../../components/Calendars/NewCalendar"
 import styles from "../../styles/app.module.scss"
 import axios from "axios"
 
-export default function calendars({ user, data }) {
+const Calendars = ({ user, data }) => {
 	const [calendars, setCalendars] = useState(data)
 	return (
 		<Application user={user} title='Your calendars'>
@@ -42,3 +42,5 @@ export async function getServerSideProps(ctx) {
 		ctx.res.end()
 	}
 }
+
+export default Calendars

@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast"
 import Header from "../../components/Base"
 import sass from "../../styles/login.module.sass"
 
-const resetPassword = () => {
+const ResetPassword = () => {
 	const [email, setEmail] = useState("")
 
 	const handleSubmit = () => {
@@ -58,7 +58,7 @@ const resetPassword = () => {
 				<Header />
 				<div className={sass.login}>
 					<div className={sass.fields}>
-						<h1>We'll get your password back!</h1>
+						<h1>We&apos;ll get your password back!</h1>
 						<span></span>
 						<form
 							onSubmit={(e) => handleSubmit(e.preventDefault())}
@@ -75,7 +75,7 @@ const resetPassword = () => {
 							<button type='submit'>Send email</button>
 						</form>
 						<span>
-							Everything's fine?{" "}
+							Everything&apos;s fine?{" "}
 							<Link href='/signin'>
 								<a>Go back.</a>
 							</Link>
@@ -116,4 +116,4 @@ export async function getServerSideProps(ctx) {
 	return { props: {} }
 }
 
-export default resetPassword
+export default ResetPassword

@@ -5,7 +5,7 @@ import Application from "../components/Layout"
 import CalendarList from "../components/Calendars/CalendarList"
 import styles from "../styles/app.module.scss"
 
-export default function shared({ user, data }) {
+const Shared = ({ user, data }) => {
 	const [calendars, setCalendars] = useState(data)
 	return (
 		<Application user={user} title='Shared calendars'>
@@ -39,3 +39,5 @@ export async function getServerSideProps(ctx) {
 		ctx.res.end()
 	}
 }
+
+export default Shared

@@ -48,7 +48,7 @@ const AccountDropdown = ({ user }) => {
 			</button>
 			{toggle && (
 				<div className={styles.dropdownBarOptions}>
-					<Link href='/account'>
+					<Link href='/account' passHref>
 						<button className={styles.dropdownBarOption}>
 							Account
 						</button>

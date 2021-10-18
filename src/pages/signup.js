@@ -9,7 +9,7 @@ import Header from "../components/Base"
 import { Checking } from "../lib/icons/Undraw"
 import sass from "../styles/login.module.sass"
 
-const signup = () => {
+const Signup = () => {
 	const [name, setName] = useState("")
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
@@ -204,4 +204,4 @@ export async function getServerSideProps(ctx) {
 	return { props: {} }
 }
 
-export default signup
+export default Signup
