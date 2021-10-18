@@ -19,7 +19,7 @@ export async function getServerSideProps(ctx) {
 	try {
 		const user = JSON.parse(nookies.get(ctx).user)
 		const response = await axios.get(
-			`${process.env.API_URL}/api/calendars/${ctx.params.id}`,
+			`${process.env.API_URL}/calendars/${ctx.params.id}`,
 			{
 				headers: {
 					Accept: "application/json",
@@ -43,7 +43,7 @@ export async function getServerSideProps(ctx) {
 					country: location.data.countryCode,
 					year: new Date().getFullYear() - 1,
 				},
-				url: `${process.env.API_URL}/api/calendars/${ctx.params.id}/holidays`,
+				url: `${process.env.API_URL}/calendars/${ctx.params.id}/holidays`,
 			}
 			await axios.post(api.url, api.data, { headers: api.headers })
 		}

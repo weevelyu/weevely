@@ -31,7 +31,7 @@ export const AccountPage = ({ user }) => {
 						Authorization: user.token,
 					},
 					data: formData,
-					url: `${process.env.API_URL}/api/users/me/avatar`,
+					url: `${process.env.API_URL}/users/me/avatar`,
 				}
 				const promise = axios.post(api.url, api.data, {
 					headers: api.headers,
@@ -60,7 +60,7 @@ export const AccountPage = ({ user }) => {
 				name: name,
 				email: email,
 			},
-			url: `${process.env.API_URL}/api/users/me`,
+			url: `${process.env.API_URL}/users/me`,
 		}
 
 		if (name === user.name) delete api.data.name
@@ -108,6 +108,9 @@ export const AccountPage = ({ user }) => {
 					alt='avatarPreview'
 					width={200}
 					height={200}
+					layout='fixed'
+					quality={100}
+					objectFit='cover'
 				/>
 				<label htmlFor='image'>Upload an image</label>
 				<input

@@ -6,7 +6,7 @@ import Head from "next/head"
 import Link from "next/link"
 
 import Header from "../components/Base"
-import { Booking } from "../lib/icons/Undraw"
+import { Checking } from "../lib/icons/Undraw"
 import sass from "../styles/login.module.sass"
 
 const signup = () => {
@@ -44,7 +44,7 @@ const signup = () => {
 				password: password,
 				password_confirmation: passwordConfirmation,
 			},
-			url: `${process.env.API_URL}/api/auth/register`,
+			url: `${process.env.API_URL}/auth/register`,
 		}
 		const promise = axios.post(api.url, api.data, {
 			headers: api.headers,
@@ -102,11 +102,7 @@ const signup = () => {
 						<span>
 							Sign up to gain access to all features of the
 							application, create and manage events and connect to
-							others. See our{" "}
-							<Link href='/privacy-policy'>
-								<a>Privacy Policy</a>
-							</Link>
-							.
+							others.
 						</span>
 						<form
 							onSubmit={(e) => handleSubmit(e.preventDefault())}
@@ -139,6 +135,7 @@ const signup = () => {
 									type='password'
 									id='password'
 									name='password'
+									minLength={8}
 									value={password}
 									onChange={handleChange}
 									required
@@ -155,7 +152,7 @@ const signup = () => {
 									required
 								/>
 							</label>
-							<button type='submit'>Sign in</button>
+							<button type='submit'>Sign up</button>
 						</form>
 						<span>
 							Already a member?{" "}
@@ -165,7 +162,7 @@ const signup = () => {
 						</span>
 					</div>
 					<div className={sass.info}>
-						<Booking />
+						<Checking />
 						<h4>Why Weevely?</h4>
 						<span>
 							Simply organize your events and share them with

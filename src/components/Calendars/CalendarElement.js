@@ -1,5 +1,6 @@
 import Link from "next/link"
 import dayjs from "dayjs"
+import { useRouter } from "next/router"
 import relativeTime from "dayjs/plugin/relativeTime"
 
 import { Lock, Link as LinkSVG, Party, Time } from "../../lib/icons/Misc"
@@ -8,6 +9,7 @@ import styles from "../../styles/app.module.scss"
 
 const CalendarElement = ({ calendar, setCalendars, accessToken }) => {
 	dayjs.extend(relativeTime)
+	const { pathname } = useRouter()
 	let upcoming = 0
 	let holiday = 0
 	for (let i = 0; i < calendar.events.length; i++)
@@ -19,11 +21,13 @@ const CalendarElement = ({ calendar, setCalendars, accessToken }) => {
 			<div className={styles.calendarData}>
 				<h2 className={styles.calendarTitle}>
 					{calendar.title}
-					<CalendarDrowdown
-						calendar={calendar}
-						setCalendars={setCalendars}
-						accessToken={accessToken}
-					/>
+					{pathname.match(/^\/shared/) ? null : (
+						<CalendarDrowdown
+							calendar={calendar}
+							setCalendars={setCalendars}
+							accessToken={accessToken}
+						/>
+					)}
 				</h2>
 				<span className={styles.calendarSpan}>
 					<Party />

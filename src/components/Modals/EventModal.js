@@ -150,7 +150,7 @@ const EventModal = ({
 	const handleReset = () => {
 		axios
 			.delete(
-				`${process.env.API_URL}/api/calendars/${event.calendar_id}/events/${event.id}`,
+				`${process.env.API_URL}/calendars/${event.calendar_id}/events/${event.id}`,
 				{
 					headers: {
 						Authorization: accessToken,
@@ -166,6 +166,9 @@ const EventModal = ({
 	}
 
 	const handleSumbit = () => {
+		const dt = new Date(`${date} ${time}:00`)
+		const offset = dt.getTimezoneOffset() * 60 * 1000
+		const utcTime = new Date(dt.setTime(dt.getTime() + offset))
 		const api = {
 			headers: {
 				"Content-Type": "application/json",
@@ -173,13 +176,21 @@ const EventModal = ({
 				Authorization: accessToken,
 			},
 			data: {
-				title: title,
-				content: content,
-				category: category,
-				target: `${date} ${time}:00`,
+				title,
+				content,
+				category,
+				target: `${utcTime.getFullYear()}-${
+					utcTime.getMonth() + 1
+				}-${utcTime.getDate()} ${
+					(utcTime.getHours() < 10 ? "0" : "") + utcTime.getHours()
+				}:${
+					(utcTime.getMinutes() < 10 ? "0" : "") +
+					utcTime.getMinutes()
+				}:00`,
 			},
-			url: `${process.env.API_URL}/api/calendars/${event.calendar_id}/events/${event.id}`,
+			url: `${process.env.API_URL}/calendars/${event.calendar_id}/events/${event.id}`,
 		}
+
 		axios
 			.patch(api.url, api.data, {
 				headers: api.headers,

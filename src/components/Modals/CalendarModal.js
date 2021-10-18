@@ -58,7 +58,7 @@ const CalendarModal = ({ calendar, editing, editRecord, accessToken }) => {
 			data: {
 				title: title,
 			},
-			url: `${process.env.API_URL}/api/calendars/${calendar.id}`,
+			url: `${process.env.API_URL}/calendars/${calendar.id}`,
 		}
 		axios
 			.patch(api.url, api.data, {

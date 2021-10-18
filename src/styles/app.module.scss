@@ -46,7 +46,8 @@
 			.barAccountButton {
 				width: 100%;
 				height: 80px;
-				img {
+				@include grid-center;
+				.barAccountImage {
 					width: 34px;
 					height: 34px;
 					border: 2px solid $brand-purple;
@@ -76,7 +77,7 @@
 				&:hover {
 					background-color: $brand-accent-3;
 					&[name="danger"] {
-						background-color: rgba(255, 0, 0, 0.6);
+						background-color: $danger-red;
 						color: white;
 					}
 				}
@@ -231,7 +232,7 @@
 					&:hover {
 						background-color: $brand-accent-3;
 						&[name="danger"] {
-							background-color: rgba(255, 0, 0, 0.6);
+							background-color: $danger-red;
 							color: white;
 						}
 					}
@@ -252,12 +253,10 @@
 					width: 100%;
 					height: 110px;
 					background: $brand-purple;
+					padding: 40px 0 0 20px;
 					border-radius: 20px 20px 0 0;
 					.userBannerImage {
 						border-radius: 10px;
-						margin: 40px 0 0 20px;
-						width: 110px;
-						height: 110px;
 					}
 				}
 				.userBannerDataBlock {
@@ -435,28 +434,31 @@
 					justify-content: space-between;
 					width: 100%;
 					height: 70px;
-					padding: 0 26px;
+					padding: 0 30px;
 					.dateMonth {
 						font-size: 28px;
 						line-height: 36px;
-						font-weight: 600;
+						font-weight: 700;
+						@include font-proxima;
 					}
 					.dateButtons {
 						.dateSwitch {
 							width: 20px;
 							height: 20px;
 							svg {
-								width: 100%;
-								height: 100%;
-								transform: rotate(180deg);
+								width: 70%;
+								height: 70%;
+								fill: $black-07;
+								opacity: 0.85;
+								transform: rotate(90deg);
 								@include transition;
 								transition-property: fill;
 							}
 							&:last-child {
 								svg {
-									transform: rotate(0);
+									transform: rotate(-90deg);
 								}
-								margin-left: 20px;
+								margin-left: 30px;
 							}
 							&:hover {
 								svg {
@@ -474,6 +476,7 @@
 				.dateList {
 					width: 100%;
 					height: calc(100% - 50px);
+					padding: 10px;
 					.dateHeading {
 						width: 100%;
 						height: 20px;
@@ -504,8 +507,8 @@
 							". . . . . . ."
 							". . . . . . .";
 						.dateElement {
-							height: 100px;
-							border-radius: 0;
+							height: 81px;
+							border-radius: 50%;
 							background: transparent;
 							@include flex-center;
 							flex-direction: column;
@@ -524,7 +527,7 @@
 								}
 							}
 							&[label="today"] {
-								background: $brand-accent-2;
+								border: 2px solid $brand-purple;
 							}
 							.dateElementNumber {
 								font-size: 20px;
@@ -617,7 +620,8 @@
 							height: 50px;
 							svg {
 								width: 40%;
-								transform: rotate(-90deg);
+								fill: $black-04;
+								transform: rotate(180deg);
 								@include transition;
 								transition-property: fill;
 							}

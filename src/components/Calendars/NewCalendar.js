@@ -2,16 +2,16 @@ import axios from "axios"
 import { Plus } from "../../lib/icons/Misc"
 import styles from "../../styles/app.module.scss"
 
-const NewCalendar = ({ setCalendars, accessToken }) => {
+const NewCalendar = ({ setCalendars, user }) => {
 	const addCalendar = () => {
 		const api = {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
-				Authorization: accessToken,
+				Authorization: user.token,
 			},
 			data: {},
-			url: `${process.env.API_URL}/api/calendars/my`,
+			url: `${process.env.API_URL}/calendars/my`,
 		}
 		axios
 			.post(api.url, api.data, {
@@ -22,6 +22,7 @@ const NewCalendar = ({ setCalendars, accessToken }) => {
 					...prevState,
 					Object.assign(response.data.calendar, {
 						events: { length: 0 },
+						users: [user],
 					}),
 				])
 			})

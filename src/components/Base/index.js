@@ -14,19 +14,8 @@ const Header = () => {
 					</div>
 				</Link>
 				<div>
-					<Link href='/about'>
-						<a>About</a>
-					</Link>
-					<Link href='/privacy-policy'>
-						<a>Privacy Policy</a>
-					</Link>
-					<Link href='/contact'>
-						<a>Contact us</a>
-					</Link>
-				</div>
-				<div>
 					<Link href='/signin'>
-						<a>Login</a>
+						<a>Sign in</a>
 					</Link>
 				</div>
 			</div>

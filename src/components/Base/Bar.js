@@ -3,7 +3,7 @@ import Link from "next/link"
 
 import styles from "../../styles/app.module.scss"
 import { Logo } from "../../lib/icons/Brand"
-import { Calendar, Shared } from "../../lib/icons/Misc"
+import { Calendar, Hidden, Shared } from "../../lib/icons/Misc"
 import AccountDropdown from "../Dropdowns/AccountDropdown"
 
 const Bar = ({ user }) => {
@@ -41,6 +41,20 @@ const Bar = ({ user }) => {
 					) : (
 						<button className={styles.barOptionsButton}>
 							<Shared />
+						</button>
+					)}
+				</Link>
+				<Link href='/hidden'>
+					{pathname.match(/^\/hidden/) ? (
+						<button
+							className={styles.barOptionsButton}
+							style={{ boxShadow: "#6775ee 4px 0px 0px inset" }}
+						>
+							<Hidden />
+						</button>
+					) : (
+						<button className={styles.barOptionsButton}>
+							<Hidden />
 						</button>
 					)}
 				</Link>

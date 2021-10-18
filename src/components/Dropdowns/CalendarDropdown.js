@@ -18,14 +18,17 @@ const CalendarDrowdown = (props) => {
 				Accept: "application/json",
 				Authorization: props.accessToken,
 			},
-			url: `${process.env.API_URL}/api/calendars/${props.calendar.id}`,
+			url: `${process.env.API_URL}/calendars/${props.calendar.id}`,
 		}
-		axios.delete(api.url, {
-			headers: api.headers,
-		})
-		props.setCalendars((prevState) =>
-			prevState.filter((item) => item.id !== props.calendar.id)
-		)
+		axios
+			.delete(api.url, {
+				headers: api.headers,
+			})
+			.finally(() => {
+				props.setCalendars((prevState) =>
+					prevState.filter((item) => item.id !== props.calendar.id)
+				)
+			})
 	}
 
 	const editRecord = (fin) => {
@@ -36,6 +39,20 @@ const CalendarDrowdown = (props) => {
 	const sharedMenu = (fin) => {
 		setSharing(!sharing)
 		fin && setToggle(!toggle)
+	}
+
+	const hideCalendar = () => {
+		axios
+			.post(
+				`${process.env.API_URL}/calendars/${props.calendar.id}/hide`,
+				null,
+				{ headers: { Authorization: props.accessToken } }
+			)
+			.finally(() => {
+				props.setCalendars((prevState) =>
+					prevState.filter((item) => item.id !== props.calendar.id)
+				)
+			})
 	}
 
 	return (
@@ -65,24 +82,37 @@ const CalendarDrowdown = (props) => {
 					{props.calendar.main || (
 						<button
 							className={styles.dropdownOption}
+							onClick={() => hideCalendar()}
+						>
+							Hide
+						</button>
+					)}
+					{props.calendar.main || (
+						<button
+							className={styles.dropdownOption}
 							onClick={() => deleteRecord()}
 							name='danger'
 						>
 							Delete
 						</button>
 					)}
-					<CalendarModal
-						calendar={props.calendar}
-						editing={editing}
-						editRecord={editRecord}
-						accessToken={props.accessToken}
-					/>
-					<SharingModal
-						calendar={props.calendar}
-						sharing={sharing}
-						sharedMenu={sharedMenu}
-						accessToken={props.accessToken}
-					/>
+					{editing && (
+						<CalendarModal
+							calendar={props.calendar}
+							editing={editing}
+							editRecord={editRecord}
+							accessToken={props.accessToken}
+						/>
+					)}
+					{sharing && (
+						<SharingModal
+							calendar_id={props.calendar.id}
+							users={props.calendar.users}
+							sharing={sharing}
+							sharedMenu={sharedMenu}
+							accessToken={props.accessToken}
+						/>
+					)}
 				</div>
 			)}
 		</>

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 
@@ -11,7 +12,16 @@ const UserBanner = ({ owner, isOwner }) => {
 	return (
 		<div className={styles.userBanner}>
 			<div className={styles.userBannerImageBlock}>
-				<img className={styles.userBannerImage} src={owner.image} />
+				<Image
+					src={owner.image}
+					alt='avatarPreview'
+					className={styles.userBannerImage}
+					width={110}
+					height={110}
+					layout='fixed'
+					quality={100}
+					objectFit='cover'
+				/>
 			</div>
 			<div className={styles.userBannerDataBlock}>
 				<h2 className={styles.userBannerDataName}>{owner.name}</h2>

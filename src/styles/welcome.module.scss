@@ -1,56 +1,115 @@
-@use './index.scss' as *;
+@use "./index.scss" as *;
 
 .welcome {
-    @include flex-column;
-    width: 100%;
-    height: calc(100% - 100px);
-    align-items: center;
+	@include flex-column;
+	width: 100%;
+	height: calc(100% - 100px);
+	align-items: center;
 
-    div {
-        &:first-child {
-            @include flex-column;
-            width: 70%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
+	.welcomeHead {
+		@include flex-column;
+		align-items: center;
+		width: 70%;
+		height: fit-content;
 
-            h1 {
-                font-weight: 700;
-                font-size: 72px;
-                line-height: 108px;
-                text-align: center;
-                margin-top: 60px;
-            }
-            span {
-                font-size: 28px;
-                line-height: 42px;
-                text-align: center;
-                width: 50%;
-            }
-            button {
-                @include flex-center;
-                width: 245px;
-                height: 60px;
-                background: $brand-purple;
-                border-radius: 50px;
-                color: white;
-                font-weight: 600;
-                font-size: 20px;
-                line-height: 30px;
-                margin-top: 50px;
-                @include transition;
+		.welcomeHeadH {
+			@include font-highlight;
+			font-size: 72px;
+			letter-spacing: 4px;
+			margin: 50px 0;
+			color: darken($brand-purple, 5%);
+		}
+		.welcomeHeadS {
+			font-size: 26px;
+			line-height: 42px;
+			text-align: center;
+			width: 50%;
+		}
+	}
+	.welcomeInfo {
+		@include flex-column;
+		align-items: center;
+		width: 70%;
+		height: fit-content;
+		.welcomeInfoBlock {
+			width: 100%;
+			height: fit-content;
+			@include flex-row;
+			justify-content: space-between;
+			margin: 60px 0;
+			.welcomeInfoBlockText {
+				width: calc(100% - 720px);
+				@include flex-column;
+				align-items: flex-start;
+				justify-content: center;
+				.welcomeInfoBlockTextH {
+					font-size: 40px;
+					margin-bottom: 30px;
+					color: darken($brand-purple, 5%);
+				}
+				.welcomeInfoBlockTextS {
+					font-size: 24px;
+				}
+			}
+		}
+	}
+	.welcomeAd {
+		@include flex-center;
+		flex-direction: column;
+		width: 100%;
+		margin: 60px 0;
+		svg {
+			width: 200px;
+		}
+	}
+	.welcomeButtonStart {
+		@include flex-center;
+		width: 245px;
+		height: 60px;
+		background: $brand-purple;
+		border-radius: 50px;
+		color: white;
+		font-weight: 600;
+		font-size: 20px;
+		line-height: 30px;
+		margin-top: 50px;
+		@include transition;
 
-                &:hover {
-                    background: darken($brand-purple, 10%);
-                }
-                &:active {
-                    background: darken($brand-purple, 5%);
-                }
-            }
-            svg {
-                margin-top: 40px;
-                width: 450px;
-            }
-        }
-    }
+		&:hover {
+			background: darken($brand-purple, 10%);
+		}
+		&:active {
+			background: darken($brand-purple, 5%);
+		}
+	}
+	.footer {
+		width: 100%;
+		height: 100px;
+		padding: 0 100px;
+		@include flex-row;
+		justify-content: space-between;
+		align-items: center;
+		.footerLeft {
+			svg {
+				width: 20px;
+				fill: $black-04;
+				margin-left: 10px;
+				cursor: pointer;
+				&:first-child {
+					width: 40px;
+					fill: none;
+					margin: 0 10px 0 0;
+					cursor: default;
+				}
+				&:nth-child(3) {
+					margin-left: 50px;
+				}
+			}
+			height: 100%;
+			width: fit-content;
+			@include flex-center;
+			font-size: 14px;
+			font-weight: 500;
+		}
+	}
 }

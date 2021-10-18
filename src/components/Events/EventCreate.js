@@ -20,7 +20,7 @@ const EventCreate = ({
 			data: {
 				target: `${year}-${month}-${day}`,
 			},
-			url: `${process.env.API_URL}/api/calendars/${calendarId}/events`,
+			url: `${process.env.API_URL}/calendars/${calendarId}/events`,
 		}
 		axios.post(api.url, api.data, { headers: api.headers }).then((res) => {
 			setEvents((prevState) => [

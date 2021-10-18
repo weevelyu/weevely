@@ -1,0 +1,80 @@
+@use "index.scss" as *;
+
+.sharedModalForm {
+	@include flex-column;
+	width: 100%;
+	height: fit-content;
+	.sharedModalFormUser {
+		@include flex-row;
+		justify-content: space-between;
+		width: 100%;
+		height: 34px;
+		margin-bottom: 6px;
+		&:nth-child(3) {
+			margin-top: 16px;
+		}
+	}
+	.sharedModalFormInput {
+		width: 100%;
+		height: 100%;
+		border: 1px solid $brand-accent-3;
+		border-radius: 8px;
+		padding: 6px;
+		font-size: 16px;
+		margin: 0 10px;
+		&:read-only {
+			cursor: not-allowed;
+		}
+		&[name="Add"] {
+			border: 1px solid $brand-accent-1;
+			margin: 0 10px 0 0;
+		}
+	}
+	.sharedModalFormUserAvatar {
+		width: 46px;
+		height: 100%;
+		img {
+			width: 34px;
+			height: 100%;
+			border-radius: 50%;
+		}
+	}
+	.sharedModalFormHint {
+		width: 100%;
+		text-align: left;
+		font-size: 14px;
+		color: $black-04;
+		margin-top: 20px;
+	}
+	.sharedModalFormButton {
+		width: 50px;
+		height: 100%;
+		background-color: $danger-red;
+		box-shadow: $shadow-lighten;
+		border-radius: 8px;
+		cursor: pointer;
+		svg {
+			width: 20px;
+			fill: $brand-white;
+		}
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+		&[value="Add"] {
+			background-color: $brand-purple;
+			color: $brand-white;
+			font-size: 14px;
+			font-weight: 600;
+		}
+		&[value="Apply"] {
+			width: 100%;
+			height: 34px;
+			background-color: $brand-purple;
+			color: $brand-white;
+			font-size: 14px;
+			font-weight: 500;
+			margin-top: 14px;
+		}
+	}
+}

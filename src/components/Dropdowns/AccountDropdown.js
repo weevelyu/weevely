@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import axios from "axios"
 
@@ -14,7 +15,7 @@ const AccountDropdown = ({ user }) => {
 				Accept: "application/json",
 				Authorization: user.token,
 			},
-			url: `${process.env.API_URL}/api/auth/signout`,
+			url: `${process.env.API_URL}/auth/signout`,
 		}
 		axios
 			.post(api.url, null, {
@@ -33,7 +34,17 @@ const AccountDropdown = ({ user }) => {
 				onClick={() => setToggle(!toggle)}
 				className={styles.barAccountButton}
 			>
-				<img src={user.image} alt='picture' />
+				<div className={styles.barAccountImage}>
+					<Image
+						src={user.image}
+						className={styles.barAccountImage}
+						width={34}
+						height={34}
+						alt='avatarPreview'
+						quality={60}
+						objectFit='cover'
+					/>
+				</div>
 			</button>
 			{toggle && (
 				<div className={styles.dropdownBarOptions}>

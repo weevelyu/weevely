@@ -34,7 +34,7 @@ const signin = () => {
 				name: name,
 				password: password,
 			},
-			url: `${process.env.API_URL}/api/auth/signin`,
+			url: `${process.env.API_URL}/auth/signin`,
 		}
 		const promise = axios.post(api.url, api.data, {
 			headers: api.headers,
@@ -43,7 +43,8 @@ const signin = () => {
 		toast.promise(promise, {
 			loading: "Logging in...",
 			success: (response) => {
-				location.replace("/calendars")
+				// location.replace("/calendars")
+				console.log(response)
 				return response.data.message
 			},
 			error: (error) => {
@@ -85,11 +86,7 @@ const signin = () => {
 						<span>
 							Log in to gain access to all features of the
 							application, create and manage events and connect to
-							others. See our{" "}
-							<Link href='/privacy-policy'>
-								<a>Privacy Policy</a>
-							</Link>
-							.
+							others.
 						</span>
 						<form
 							onSubmit={(e) => handleSubmit(e.preventDefault())}
@@ -119,6 +116,12 @@ const signin = () => {
 							<button type='submit'>Sign in</button>
 						</form>
 						<span>
+							Forgot your password?{" "}
+							<Link href='/reset-password'>
+								<a>Let's get it back!</a>
+							</Link>
+						</span>
+						<span>
 							Not a member yet?{" "}
 							<Link href='/signup'>
 								<a>Sign up!</a>
@@ -127,11 +130,11 @@ const signin = () => {
 					</div>
 					<div className={sass.info}>
 						<Booking />
-						<h4>Why Weevely?</h4>
+						<h4>We've missed you!</h4>
 						<span>
-							Simply organize your events and share them with
-							others! Explore our solutions to create a community,
-							calendar or more!
+							Create as many calendars as you want, share them
+							with your friends, coworkers or employees! Various
+							types of events with great customization!
 						</span>
 					</div>
 				</div>

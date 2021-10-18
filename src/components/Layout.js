@@ -2,7 +2,7 @@ import Head from "next/head"
 import Bar from "../components/Base/Bar"
 import scss from "../styles/app.module.scss"
 
-export default function Application({ children, user, title }) {
+const Application = ({ children, user, title }) => {
 	return (
 		<>
 			<Head>
@@ -19,3 +19,5 @@ export default function Application({ children, user, title }) {
 		</>
 	)
 }
+
+export default Application
