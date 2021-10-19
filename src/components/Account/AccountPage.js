@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { useState } from "react"
+import { setCookie } from "nookies"
 import toast, { Toaster } from "react-hot-toast"
 import axios from "axios"
 
@@ -40,6 +41,10 @@ export const AccountPage = ({ user }) => {
 				toast.promise(promise, {
 					loading: "Changing avatar...",
 					success: (response) => {
+						setCookie(null, "user", response.data.cookie, {
+							maxAge: JSON.parse(response.data.cookie).ttl,
+							path: "/",
+						})
 						location.reload()
 						return response.data.message
 					},
@@ -77,7 +82,13 @@ export const AccountPage = ({ user }) => {
 
 		toast.promise(promise, {
 			loading: "Updating you...",
-			success: (response) => response.data.message,
+			success: (response) => {
+				setCookie(null, "user", response.data.cookie, {
+					maxAge: JSON.parse(response.data.cookie).ttl,
+					path: "/",
+				})
+				return response.data.message
+			},
 			error: (error) => {
 				if (error.response.data.errors) {
 					if (error.response.data.errors.name)

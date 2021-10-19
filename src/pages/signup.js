@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-import nookies from "nookies"
+import nookies, { setCookie } from "nookies"
 import toast, { Toaster } from "react-hot-toast"
 import Head from "next/head"
 import Link from "next/link"
@@ -53,6 +53,10 @@ const Signup = () => {
 		toast.promise(promise, {
 			loading: "Signing up..",
 			success: (response) => {
+				setCookie(null, "user", response.data.cookie, {
+					maxAge: JSON.parse(response.data.cookie).ttl,
+					path: "/",
+				})
 				location.replace("/calendars")
 				return response.data.message
 			},

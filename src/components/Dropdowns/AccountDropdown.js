@@ -1,3 +1,4 @@
+import { destroyCookie } from "nookies"
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -23,6 +24,7 @@ const AccountDropdown = ({ user }) => {
 				withCredentials: true,
 			})
 			.then(() => {
+				destroyCookie(null, "user")
 				location.href = "/"
 				return "Goodbye!"
 			})
