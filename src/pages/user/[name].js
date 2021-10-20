@@ -18,27 +18,29 @@ const user = ({ user, owner, isOwner }) => {
 }
 
 export async function getServerSideProps(ctx) {
-	try {
-		const user = JSON.parse(nookies.get(ctx).user)
-		const response = await axios.get(
-			`${process.env.API_URL}/users/${ctx.params.name}`,
-			{
-				headers: {
-					Accept: "application/json",
-					Authorization: user.token,
-				},
-			}
-		)
-		return {
-			props: {
-				user: user,
-				owner: response.data,
-				isOwner: user.name === response.data.name,
-			},
-		}
-	} catch (e) {
+	const cookie = nookies.get(ctx).user
+	if (!cookie) {
 		ctx.res.writeHead(303, { Location: "/signin" })
 		ctx.res.end()
+	}
+
+	const user = JSON.parse(cookie)
+	const response = await axios.get(
+		`${process.env.API_URL}/users/${ctx.params.name}`,
+		{
+			headers: {
+				Accept: "application/json",
+				Authorization: user.token,
+			},
+		}
+	)
+
+	return {
+		props: {
+			user: user,
+			owner: response.data,
+			isOwner: user.name === response.data.name,
+		},
 	}
 }
 

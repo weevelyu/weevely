@@ -22,22 +22,23 @@ const Shared = ({ user, data }) => {
 }
 
 export async function getServerSideProps(ctx) {
-	try {
-		const user = JSON.parse(nookies.get(ctx).user)
-		const response = await axios.get(
-			`${process.env.API_URL}/calendars/my/shared`,
-			{
-				headers: {
-					Accept: "application/json",
-					Authorization: user.token,
-				},
-			}
-		)
-		return { props: { user: user, data: response.data } }
-	} catch (e) {
+	const cookie = nookies.get(ctx).user
+	if (!cookie) {
 		ctx.res.writeHead(303, { Location: "/signin" })
 		ctx.res.end()
 	}
+
+	const user = JSON.parse(cookie)
+	const response = await axios.get(
+		`${process.env.API_URL}/calendars/my/shared`,
+		{
+			headers: {
+				Accept: "application/json",
+				Authorization: user.token,
+			},
+		}
+	)
+	return { props: { user: user, data: response.data } }
 }
 
 export default Shared

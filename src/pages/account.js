@@ -15,13 +15,14 @@ const account = ({ user }) => {
 }
 
 export async function getServerSideProps(ctx) {
-	try {
-		const user = JSON.parse(nookies.get(ctx).user)
-		return { props: { user: user } }
-	} catch (e) {
+	const cookie = nookies.get(ctx).user
+	if (!cookie) {
 		ctx.res.writeHead(303, { Location: "/signin" })
 		ctx.res.end()
 	}
+
+	const user = JSON.parse(cookie)
+	return { props: { user: user } }
 }
 
 export default account
