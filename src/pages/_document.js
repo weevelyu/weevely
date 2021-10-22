@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
 					<meta name='revisit-after' content='1 day' />
 					<meta httpEquiv='pragma' content='no-cache' />
 					<meta httpEquiv='cache-control' content='no-cache' />
-					<meta name='theme-color' content='#7c6aef' />
+					<meta name='theme-color' content='#6775ee' />
 				</Head>
 				<body>
 					<Main />
