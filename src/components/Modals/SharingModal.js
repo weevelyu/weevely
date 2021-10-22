@@ -1,23 +1,10 @@
 import axios from "axios"
 import Image from "next/image"
+import { useRouter } from "next/router"
 import { useState } from "react"
 import Modal from "react-modal"
-
-import styles from "../../styles/modals.module.scss"
+import style from "../../styles/modals.module.scss"
 import { Remove } from "../../lib/icons/Misc"
-
-const style = {
-	content: {
-		position: "absolute",
-		top: "19%",
-		left: "37%",
-		width: "500px",
-		height: "fit-content",
-		borderRadius: "14px",
-		borderColor: "#b8bef3",
-		padding: 20,
-	},
-}
 
 const EventModal = ({
 	calendar_id,
@@ -26,6 +13,7 @@ const EventModal = ({
 	sharedMenu,
 	accessToken,
 }) => {
+	const router = useRouter()
 	const [names, setNames] = useState(() => {
 		const namesArr = []
 		for (let i = 0; i < users.length; i++) namesArr.push(users[i].name)
@@ -56,7 +44,7 @@ const EventModal = ({
 			)
 			.finally(() => {
 				sharedMenu(true)
-				location.reload()
+				router.reload()
 			})
 	}
 
@@ -64,7 +52,7 @@ const EventModal = ({
 		<Modal
 			isOpen={sharing}
 			contentLabel='Sharing calendar'
-			style={style}
+			className={style.sharedModal}
 			ariaHideApp={false}
 			onRequestClose={(e) => {
 				e.stopPropagation()
@@ -74,25 +62,25 @@ const EventModal = ({
 		>
 			<h1>Share calendar</h1>
 			<form
-				className={styles.sharedModalForm}
+				className={style.sharedModalForm}
 				onSubmit={(e) => onSubmit(e.preventDefault())}
 			>
-				<span className={styles.sharedModalFormHint}>
+				<span className={style.sharedModalFormHint}>
 					Enter user&apos;s name or ShareID
 				</span>
-				<div className={styles.sharedModalFormUser}>
+				<div className={style.sharedModalFormUser}>
 					<input
 						type='text'
 						name='Add'
 						value={newName}
 						onChange={(e) => setNewName(e.target.value)}
-						className={styles.sharedModalFormInput}
+						className={style.sharedModalFormInput}
 					/>
 					<input
 						type='button'
 						value='Add'
 						onClick={(e) => onAdd(e.preventDefault())}
-						className={styles.sharedModalFormButton}
+						className={style.sharedModalFormButton}
 					/>
 				</div>
 				{names.map((name) => {
@@ -103,9 +91,9 @@ const EventModal = ({
 					return (
 						<div
 							key={names.indexOf(name)}
-							className={styles.sharedModalFormUser}
+							className={style.sharedModalFormUser}
 						>
-							<div className={styles.sharedModalFormUserAvatar}>
+							<div className={style.sharedModalFormUserAvatar}>
 								<Image
 									src={image}
 									alt='avatarPreview'
@@ -119,7 +107,7 @@ const EventModal = ({
 								type='text'
 								readOnly
 								value={name}
-								className={styles.sharedModalFormInput}
+								className={style.sharedModalFormInput}
 							/>
 							{names.indexOf(name) === 0 ? (
 								<button
@@ -128,7 +116,7 @@ const EventModal = ({
 									onClick={(e) =>
 										onRemove(e.currentTarget.name)
 									}
-									className={styles.sharedModalFormButton}
+									className={style.sharedModalFormButton}
 								>
 									<Remove />
 								</button>
@@ -138,7 +126,7 @@ const EventModal = ({
 									onClick={(e) =>
 										onRemove(e.currentTarget.name)
 									}
-									className={styles.sharedModalFormButton}
+									className={style.sharedModalFormButton}
 								>
 									<Remove />
 								</button>
@@ -149,7 +137,7 @@ const EventModal = ({
 				<input
 					type='submit'
 					value='Apply'
-					className={styles.sharedModalFormButton}
+					className={style.sharedModalFormButton}
 				/>
 			</form>
 		</Modal>

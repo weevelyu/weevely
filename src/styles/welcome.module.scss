@@ -11,6 +11,9 @@
 		align-items: center;
 		width: 70%;
 		height: fit-content;
+		@include phone {
+			width: 85%;
+		}
 
 		.welcomeHeadH {
 			@include font-highlight;
@@ -18,12 +21,22 @@
 			letter-spacing: 4px;
 			margin: 50px 0;
 			color: darken($brand-purple, 5%);
+			text-align: center;
+			@include phone {
+				font-size: 40px;
+				margin: 20px 0;
+			}
 		}
 		.welcomeHeadS {
 			font-size: 26px;
 			line-height: 42px;
 			text-align: center;
 			width: 50%;
+			@include phone {
+				width: 80%;
+				font-size: 20px;
+				line-height: 30px;
+			}
 		}
 	}
 	.welcomeInfo {
@@ -31,14 +44,31 @@
 		align-items: center;
 		width: 70%;
 		height: fit-content;
+		@include phone {
+			width: 85%;
+		}
 		.welcomeInfoBlock {
 			width: 100%;
 			height: fit-content;
 			@include flex-row;
 			justify-content: space-between;
 			margin: 60px 0;
+			@include phone {
+				margin: 50px 0;
+				flex-direction: column-reverse;
+				&:nth-child(2n) {
+					flex-direction: column;
+				}
+			}
+			.welcomeInfoBlockImage {
+				width: 720px;
+				height: 405px;
+			}
 			.welcomeInfoBlockText {
 				width: calc(100% - 720px);
+				@include phone {
+					width: 85%;
+				}
 				@include flex-column;
 				align-items: flex-start;
 				justify-content: center;
@@ -46,9 +76,17 @@
 					font-size: 40px;
 					margin-bottom: 30px;
 					color: darken($brand-purple, 5%);
+					@include phone {
+						font-size: 28px;
+						margin-bottom: 10px;
+					}
 				}
 				.welcomeInfoBlockTextS {
 					font-size: 24px;
+					@include phone {
+						font-size: 20px;
+						line-height: 26px;
+					}
 				}
 			}
 		}
@@ -60,6 +98,9 @@
 		margin: 60px 0;
 		svg {
 			width: 200px;
+			@include phone {
+				width: 140px;
+			}
 		}
 	}
 	.welcomeButtonStart {
@@ -71,7 +112,6 @@
 		color: white;
 		font-weight: 600;
 		font-size: 20px;
-		line-height: 30px;
 		margin-top: 50px;
 		@include transition;
 
@@ -81,6 +121,12 @@
 		&:active {
 			background: darken($brand-purple, 5%);
 		}
+		@include phone {
+			width: 180px;
+			height: 50px;
+			font-size: 16px;
+			margin-top: 30px;
+		}
 	}
 	.footer {
 		width: 100%;
@@ -89,24 +135,39 @@
 		@include flex-row;
 		justify-content: space-between;
 		align-items: center;
+		@include phone {
+			padding: 0 20px;
+		}
 		.footerLeft {
 			svg {
 				width: 40px;
 				fill: none;
 				margin: 0 10px 0 0;
 				cursor: default;
+				@include phone {
+					width: 16px;
+				}
 			}
 			a {
 				@include flex-center;
 				height: 100%;
 				cursor: pointer;
 				margin-left: 4px;
+				@include phone {
+					margin-left: 0px;
+				}
 				&:nth-child(3) {
 					margin-left: 20px;
+					@include phone {
+						margin-left: 10px;
+					}
 				}
 				svg {
 					width: 20px;
 					fill: $black-04;
+					@include phone {
+						width: 10px;
+					}
 				}
 			}
 			height: 100%;
@@ -114,6 +175,14 @@
 			@include flex-center;
 			font-size: 14px;
 			font-weight: 500;
+			@include phone {
+				font-size: 8px;
+			}
+		}
+		.footerRight {
+			@include phone {
+				font-size: 8px;
+			}
 		}
 	}
 }

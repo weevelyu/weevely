@@ -4,12 +4,14 @@ import axios from "axios"
 import toast, { Toaster } from "react-hot-toast"
 import Head from "next/head"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 import Header from "../components/Base"
 import { Booking } from "../lib/icons/Undraw"
 import sass from "../styles/login.module.sass"
 
 const Signin = () => {
+	const router = useRouter()
 	const [name, setName] = useState("")
 	const [password, setPassword] = useState("")
 
@@ -47,7 +49,7 @@ const Signin = () => {
 					maxAge: JSON.parse(response.data.cookie).ttl,
 					path: "/",
 				})
-				location.replace("/calendars")
+				router.replace("/calendars")
 				return response.data.message
 			},
 			error: (error) => {
@@ -166,11 +168,13 @@ const Signin = () => {
 }
 
 export async function getServerSideProps(ctx) {
-	const user = nookies.get(ctx).user
-	if (!!user) {
-		ctx.res.writeHead(303, { Location: "/calendars" })
-		ctx.res.end()
-	}
+	if (!!nookies.get(ctx).user)
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/calendars",
+			},
+		}
 
 	return { props: {} }
 }

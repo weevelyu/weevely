@@ -3,10 +3,12 @@ import { useState } from "react"
 import { setCookie } from "nookies"
 import toast, { Toaster } from "react-hot-toast"
 import axios from "axios"
+import { useRouter } from "next/router"
 
 import styles from "../../styles/app.module.scss"
 
 export const AccountPage = ({ user }) => {
+	const router = useRouter()
 	const [name, setName] = useState(user.name)
 	const [email, setEmail] = useState(user.email)
 
@@ -45,7 +47,7 @@ export const AccountPage = ({ user }) => {
 							maxAge: JSON.parse(response.data.cookie).ttl,
 							path: "/",
 						})
-						location.reload()
+						router.reload()
 						return response.data.message
 					},
 					error: (error) => error,

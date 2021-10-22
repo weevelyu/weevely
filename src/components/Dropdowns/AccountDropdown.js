@@ -2,11 +2,13 @@ import { destroyCookie } from "nookies"
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import axios from "axios"
 
 import styles from "../../styles/app.module.scss"
 
 const AccountDropdown = ({ user }) => {
+	const router = useRouter()
 	const [toggle, setToggle] = useState(false)
 
 	const logout = () => {
@@ -24,8 +26,8 @@ const AccountDropdown = ({ user }) => {
 				withCredentials: true,
 			})
 			.then(() => {
-				destroyCookie(null, "user")
-				location.href = "/"
+				destroyCookie(null, "user", { path: "/" })
+				router.replace("/")
 				return "Goodbye!"
 			})
 	}

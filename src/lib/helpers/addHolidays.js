@@ -1,8 +1,7 @@
 import axios from "axios"
 
 export default async function addHolidays(calendar_id, token) {
-	const ip = await axios.get(`https://checkip.amazonaws.com/`)
-	const location = await axios.get(`http://ip-api.com/json/${ip.data}`)
+	const response = await axios.get(`https://api.db-ip.com/v2/free/self`)
 	const api = {
 		headers: {
 			"Content-Type": "application/json",
@@ -10,7 +9,7 @@ export default async function addHolidays(calendar_id, token) {
 			Authorization: token,
 		},
 		data: {
-			country: location.data.countryCode,
+			country: response.data.countryCode,
 			year: new Date().getFullYear() - 1,
 		},
 		url: `${process.env.API_URL}/calendars/${calendar_id}/holidays`,

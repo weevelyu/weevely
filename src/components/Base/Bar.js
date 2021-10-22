@@ -19,8 +19,7 @@ const Bar = ({ user }) => {
 				<Link href='/calendars'>
 					{pathname.match(/^\/calendars/) ? (
 						<button
-							className={styles.barOptionsButton}
-							style={{ boxShadow: "#6775ee 4px 0px 0px inset" }}
+							className={`${styles.barOptionsButton} ${styles.barOptionsButtonActive}`}
 						>
 							<Calendar />
 						</button>
@@ -33,8 +32,7 @@ const Bar = ({ user }) => {
 				<Link href='/shared'>
 					{pathname.match(/^\/shared/) ? (
 						<button
-							className={styles.barOptionsButton}
-							style={{ boxShadow: "#6775ee 4px 0px 0px inset" }}
+							className={`${styles.barOptionsButton} ${styles.barOptionsButtonActive}`}
 						>
 							<Shared />
 						</button>
@@ -47,8 +45,7 @@ const Bar = ({ user }) => {
 				<Link href='/hidden'>
 					{pathname.match(/^\/hidden/) ? (
 						<button
-							className={styles.barOptionsButton}
-							style={{ boxShadow: "#6775ee 4px 0px 0px inset" }}
+							className={`${styles.barOptionsButton} ${styles.barOptionsButtonActive}`}
 						>
 							<Hidden />
 						</button>

@@ -19,21 +19,33 @@ const user = ({ user, owner, isOwner }) => {
 
 export async function getServerSideProps(ctx) {
 	const cookie = nookies.get(ctx).user
-	if (!cookie) {
-		ctx.res.writeHead(303, { Location: "/signin" })
-		ctx.res.end()
-	}
+	if (!!!cookie)
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/signin",
+			},
+		}
 
 	const user = JSON.parse(cookie)
-	const response = await axios.get(
-		`${process.env.API_URL}/users/${ctx.params.name}`,
-		{
+	const response = await axios
+		.get(`${process.env.API_URL}/users/${ctx.params.name}`, {
 			headers: {
 				Accept: "application/json",
 				Authorization: user.token,
 			},
+		})
+		.catch(() => {
+			return false
+		})
+
+	if (!response)
+		return {
+			redirect: {
+				permanent: false,
+				destination: `/user/${user.name}`,
+			},
 		}
-	)
 
 	return {
 		props: {

@@ -118,11 +118,13 @@ const ResetPasswordToken = ({ token }) => {
 }
 
 export async function getServerSideProps(ctx) {
-	const user = nookies.get(ctx).user
-	if (!!user) {
-		ctx.res.writeHead(303, { Location: "/calendars" })
-		ctx.res.end()
-	}
+	if (!!nookies.get(ctx).user)
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/signin",
+			},
+		}
 
 	return { props: { token: ctx.params.token } }
 }

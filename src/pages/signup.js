@@ -4,12 +4,14 @@ import nookies, { setCookie } from "nookies"
 import toast, { Toaster } from "react-hot-toast"
 import Head from "next/head"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 import Header from "../components/Base"
 import { Checking } from "../lib/icons/Undraw"
 import sass from "../styles/login.module.sass"
 
 const Signup = () => {
+	const router = useRouter()
 	const [name, setName] = useState("")
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
@@ -57,7 +59,7 @@ const Signup = () => {
 					maxAge: JSON.parse(response.data.cookie).ttl,
 					path: "/",
 				})
-				location.replace("/calendars")
+				router.replace("/calendars")
 				return response.data.message
 			},
 			error: (error) => {
@@ -200,11 +202,14 @@ const Signup = () => {
 }
 
 export async function getServerSideProps(ctx) {
-	const user = nookies.get(ctx).user
-	if (!!user) {
-		ctx.res.writeHead(303, { Location: "/calendars" })
-		ctx.res.end()
-	}
+	if (!!nookies.get(ctx).user)
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/calendars",
+			},
+		}
+
 	return { props: {} }
 }
 

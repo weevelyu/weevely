@@ -8,9 +8,6 @@ export const InfoBlock = ({ image, heading, content }) => {
 				src={image}
 				alt='calendarPreview'
 				className={style.welcomeInfoBlockImage}
-				width={720}
-				height={405}
-				layout='fixed'
 				quality={100}
 				objectFit='contain'
 				placeholder='blur'
@@ -35,9 +32,6 @@ export const InfoBlockReverse = ({ image, heading, content }) => {
 				src={image}
 				alt='calendarPreview'
 				className={style.welcomeInfoBlockImage}
-				width={720}
-				height={405}
-				layout='fixed'
 				quality={100}
 				objectFit='contain'
 				placeholder='blur'

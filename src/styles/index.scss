@@ -16,6 +16,43 @@ $shadow-default: 0px 4px 17px rgba(0, 0, 0, 0.1);
 $shadow-darken: 0px 0px 20px rgba(0, 0, 0, 0.25);
 $transition-default: 0.1s cubic-bezier(1, 0.3, 0.51, 0.6);
 
+@mixin phone {
+	@media (min-width: 280px) and (max-width: 768px) {
+		@content;
+	}
+}
+
+@mixin anim-pop-up {
+	animation: popUp 0.1s ease forwards;
+	opacity: 0;
+	@keyframes popUp {
+		0% {
+			opacity: 0;
+			transform: translateY(100%);
+		}
+		50% {
+			opacity: 0.5;
+		}
+		100% {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+}
+
+@mixin anim-fade-in {
+	animation: fadeIn 0.5s ease forwards;
+	opacity: 0;
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+}
+
 @mixin unselectable {
 	user-select: none;
 	-moz-user-select: none;

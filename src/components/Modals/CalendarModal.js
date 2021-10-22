@@ -2,47 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useRouter } from "next/router"
 import Modal from "react-modal"
-import { Close } from "../../lib/icons/Misc"
-
-const style = {
-	content: {
-		position: "absolute",
-		top: "19%",
-		left: "37%",
-		width: "500px",
-		height: "fit-content",
-		borderRadius: "18px",
-		borderColor: "#b8bef3",
-	},
-	form: {
-		width: "100%",
-		marginTop: "20px",
-	},
-	label: {
-		display: "flex",
-		flexDirection: "column",
-		fontSize: 14,
-	},
-	input: {
-		width: "100%",
-		height: 40,
-		marginTop: 6,
-		background: "#e0e3f6",
-		fontSize: 16,
-		padding: "0 6px",
-		borderRadius: "8px",
-		border: "1px solid #b8bef3",
-	},
-	apply: {
-		width: 80,
-		height: 40,
-		background: "#6775ee",
-		color: "white",
-		fontSize: 16,
-		borderRadius: 10,
-		marginTop: 40,
-	},
-}
+import style from "../../styles/modals.module.scss"
 
 const CalendarModal = ({ calendar, editing, editRecord, accessToken }) => {
 	const router = useRouter()
@@ -70,31 +30,34 @@ const CalendarModal = ({ calendar, editing, editRecord, accessToken }) => {
 			})
 	}
 
-	const handleChange = (target) => setTitle(target.value)
-
 	return (
 		<Modal
 			isOpen={editing}
-			contentLabel='Example Modal'
-			style={style}
+			contentLabel='Calendar Modal'
+			className={style.calendarModal}
 			ariaHideApp={false}
+			onRequestClose={(e) => {
+				e.stopPropagation()
+				editRecord(true)
+			}}
+			shouldCloseOnOverlayClick={true}
 		>
-			<button onClick={() => editRecord(true)}>
-				<Close width={18} fill='rgba(0, 0, 0, 0.7)' />
-			</button>
-			<form style={style.form}>
-				<label htmlFor='calendarTitle' style={style.label}>
+			<form className={style.calendarModalForm}>
+				<label
+					htmlFor='calendarTitle'
+					className={style.calendarModalLabel}
+				>
 					Calendar Title
 					<input
-						style={style.input}
+						className={style.calendarModalInput}
 						id='calendarTitle'
 						placeholder='Calendar title'
 						value={title}
-						onChange={(e) => handleChange(e.target)}
+						onChange={(e) => setTitle(e.target.value)}
 					/>
 				</label>
 				<button
-					style={style.apply}
+					className={style.calendarModalApply}
 					type='submit'
 					onClick={(e) => applyChanges(e.preventDefault())}
 				>
