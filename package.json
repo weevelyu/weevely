@@ -5,10 +5,10 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && next start",
-    "build": "SET NODE_OPTIONS=--openssl-legacy-provider && next build",
-    "dev": "SET NODE_OPTIONS=--openssl-legacy-provider && next dev",
-    "lint": "SET NODE_OPTIONS=--openssl-legacy-provider && next lint"
+    "start": "next start",
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint"
   },
   "repository": {
     "type": "git",
