@@ -1,4 +1,4 @@
-<p align='center'><img src="https://raw.githubusercontent.com/PAXANDDOS/PAXANDDOS/main/weevely/svg/weevely-logo.svg" height="120"></p>
+<p align='center'><img src="https://raw.githubusercontent.com/weevelyu/assets/main/svg/weevely-logo.svg" height="120"></p>
 <p align="center">
         <a href="https://nextjs.org/" target="_blank">
             <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" height="50">
@@ -52,13 +52,13 @@ Weevely is made with help of these useful dependencies:
 -   [React Modal](https://github.com/reactjs/react-modal) `^3.14.3`
 
 ## :framed_picture: Screenshots
-
-![App Screenshot](https://raw.githubusercontent.com/PAXANDDOS/PAXANDDOS/main/weevely/calendar.png)
-![App Screenshot](https://raw.githubusercontent.com/PAXANDDOS/PAXANDDOS/main/weevely/calendars.png)
-![App Screenshot](https://raw.githubusercontent.com/PAXANDDOS/PAXANDDOS/main/weevely/event.png)
-![App Screenshot](https://raw.githubusercontent.com/PAXANDDOS/PAXANDDOS/main/weevely/account.png)
-![App Screenshot](https://raw.githubusercontent.com/PAXANDDOS/PAXANDDOS/main/weevely/share.png)
-![App Screenshot](https://raw.githubusercontent.com/PAXANDDOS/PAXANDDOS/main/weevely/profile.png)
+https://raw.githubusercontent.com/weevelyu/assets/main/svg/weevely-logo.svg
+![App Screenshot](https://raw.githubusercontent.com/weevelyu/assets/main/calendar.png)
+![App Screenshot](https://raw.githubusercontent.com/weevelyu/assets/main/calendars.png)
+![App Screenshot](https://raw.githubusercontent.com/weevelyu/assets/main/event.png)
+![App Screenshot](https://raw.githubusercontent.com/weevelyu/assets/main/account.png)
+![App Screenshot](https://raw.githubusercontent.com/weevelyu/assets/main/share.png)
+![App Screenshot](https://raw.githubusercontent.com/weevelyu/assets/main/profile.png)
 
 ## :fox_face: Have a great day!
 
